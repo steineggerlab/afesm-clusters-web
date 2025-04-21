@@ -79,10 +79,9 @@
                             </template>
                             <span>
                                 <img width="600" src="./assets/cluster_step.jpg"><br>
-                                AFDB/Foldseek: Clustered with structural similarity<br>
-                                AFDB50/Mmseqs: Clustered at sequence identity 50%<br>
-                                Fragment: Removed fragments among AFDB50<br>
-                                Singleton: Removed singletons after fragment removal
+                                AFESM/Foldseek: Clustered with structural similarity<br>
+                                AFESM30/Mmseqs: Clustered at sequence identity 30%<br>
+                                Low plddt: removed due to the plddt < 60%<br>
                             </span>
                         </v-tooltip>
                     </v-btn>
@@ -94,7 +93,7 @@
                         <Fragment :flag="1"></Fragment>
                         <Fragment :flag="2"></Fragment>
                         <Fragment :flag="3"></Fragment>
-                        <Fragment :flag="4"></Fragment>
+                        <!-- <Fragment :flag="4"></Fragment> -->
                     </v-chip-group>
                 </v-card>
             </v-menu>
@@ -242,6 +241,7 @@ export default {
             this.$axios.get("/cluster/" + cluster + "/members", this.requestOptions)
                 .then(response => {
                     this.members = response.data.result;
+                    console.log(this.members);
                     this.totalMembers = response.data.total;
                     this.fetchImages(this.members.map(m => m.accession));
                 })

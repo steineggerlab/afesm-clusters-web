@@ -148,7 +148,7 @@
                 </v-card>
 
                 <p class="text-subtitle-1 mb-0 collab">
-                    AFDB Clusters is a collaboration between
+                    AFESM Clusters is a collaboration between
                     <a href="https://en.snu.ac.kr/">Seoul National University</a>, the
                     <a href="https://www.ebi.ac.uk/">European Bioinformatics Institute</a>, <br>and the
                     <a href="https://www.sib.swiss/">Swiss Institute of Bioinformatics</a>.

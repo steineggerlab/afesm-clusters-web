@@ -84,6 +84,7 @@ export default {
 				.get("/cluster/" + this.cluster + "/sankey-" + this.type)
 				.then((response) => {
 					this.response = response.data.result;
+					// console.log(this.response)
 				})
 				.catch(() => {});
 		},
@@ -245,10 +246,12 @@ export default {
 
 			return { nodes, links };
 		},
+
 		// Check if nodes array contains an object with the same id as lineage[i]
 		hasId(nodes, idToCheck) {
 			return nodes.some((node) => node.id === idToCheck);
 		},
+
 		// Main function for rendering Sankey
 		newRender(items) {
 			const { nodes, links } = this.parseData(items);

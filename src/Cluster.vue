@@ -51,7 +51,7 @@
                 <v-divider  style="margin-top:0.5em"></v-divider>
                 <h3 style="margin-top:1em">
                     Cluster summary
-                    <v-tooltip top>
+                    <!-- <v-tooltip top>
                         <template v-slot:activator="{ on }">
                             <span v-on="on">
                                 <v-icon v-on="on">{{ $MDI.HelpCircleOutline }}</v-icon>
@@ -60,55 +60,93 @@
                         <span>
                             These values are computed among the members with the <strong>clustered step</strong> AFDB/Foldseek.
                         </span>
-                    </v-tooltip>
+                    </v-tooltip> -->
                 </h3>
                 <dl class="dl-4">
                 <div>
                 <dt>
-                    Number of members
+                    Number of structure members
                 </dt>
                 <dd>
                     {{ response.n_mem }}
                 </dd>
-                </div>
-                <div>
                 <dt>
-                    Dark cluster
+                    Number of all members
                 </dt>
                 <dd>
-                    {{ response.is_dark ? 'yes' : 'no' }}
+                    {{ response.n_all_mem }}
                 </dd>
                 </div>
                 <div>
                 <dt>
-                    Average length
+                    ESM only
+                </dt>
+                <dd>
+                    {{ response.is_only_esm ? 'yes' : 'no' }}
+                </dd>
+                <dt>
+                    number of biome annotation
+                </dt>
+                <dd>
+                    {{ response.n_biome ? 'yes' : 'no' }}
+                </dd>
+                </div>
+                <div>
+                <dt>
+                    Average length (AFESM)
                 </dt>
                 <dd>
                     {{ response.avg_len.toFixed(2) }} aa
                 </dd>
+                <dt>
+                    Average length (AFESM30)
+                </dt>
+                <dd>
+                    {{ response.avg_all_len.toFixed(2) }} aa
+                </dd>
                 </div>
                 <div>
                 <dt>
-                    Average pLDDT
+                    Average pLDDT (AFESM)
                 </dt>
                 <dd>
                     {{ response.avg_plddt.toFixed(2) }}
                 </dd>
+                <dt>
+                    Average pLDDT (AFESM30)
+                </dt>
+                <dd>
+                    {{ response.avg_all_plddt.toFixed(2) }}
+                </dd>
                 </div>
                 <div style=" grid-area: 2 / 1 / 3 / 5;">
                 <dt>
-                    Lowest common ancestor and lineage
+                    Taxonomy: Lowest common ancestor and lineage
                 </dt>
                 <dd>
                     <template v-for="(taxonomy, index) in response.lineage" ><TaxSpan :taxonomy="taxonomy" :key="taxonomy.id"></TaxSpan><template v-if="index < (response.lineage.length -1)"> &#187;&nbsp;</template></template>
                 </dd>
                 </div>
-                <!-- <div style=" grid-area: 3 / 1 / 3 / 5;">
-                    <dt>Annotations</dt>
-                    <dd>
-                        <Annotations :cluster="$route.params.cluster"></Annotations>
-                    </dd>
-                </div> -->
+                <div style=" grid-area: 3 / 1 / 3 / 5;">
+                    
+                <dt>
+                    Biome: Lowest common biome and lineage
+                    <v-tooltip top>
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on">
+                                <v-icon v-on="on">{{ $MDI.HelpCircleOutline }}</v-icon>
+                            </span>
+                        </template>
+                        <span>
+                            This biome information is meaningful only when the number of biome annotation ≧ 10.
+                        </span>
+                    </v-tooltip>
+                </dt>
+                <dd>
+                    {{ response.biome_lineage }}
+                    <!-- <template v-for="(taxonomy, index) in response.lineage" ><TaxSpan :taxonomy="taxonomy" :key="taxonomy.id"></TaxSpan><template v-if="index < (response.lineage.length -1)"> &#187;&nbsp;</template></template> -->
+                </dd>
+                </div>
             </dl>
             <template v-if="response && response.warning == true">
                 <v-divider  style="margin-top:0.5em"></v-divider>
@@ -137,9 +175,9 @@ p    </Panel>
         <Members :cluster="$route.params.cluster" @select="(accession) => second = accession"></Members>
     </v-flex>
 
-    <v-flex xs12>
+    <!-- <v-flex xs12>
         <Similars :cluster="$route.params.cluster" @select="(accession) => second = accession"></Similars>
-    </v-flex>
+    </v-flex> -->
 </v-row>
 </template>
 

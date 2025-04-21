@@ -13,11 +13,11 @@ export default {
     computed: {
         flagText() {
             if (this.flag == 1) {
-                return "AFDB50/MMseqs2";
+                return "AFESM30/MMseqs2";
             } else if (this.flag == 2) {
-                return "AFDB/Foldseek";
+                return "AFESM/Foldseek";
             } else if (this.flag == 3) {
-                return "Fragment";
+                return "low plddt";
             } else if (this.flag == 4) {
                 return "Singleton";
             }

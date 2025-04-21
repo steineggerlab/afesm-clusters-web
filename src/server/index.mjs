@@ -6,7 +6,7 @@ import cors from 'cors';
 import axios from 'axios';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 
 import DbReader from './dbreader.mjs';
 import read from './compressed_ca.mjs';
@@ -29,7 +29,7 @@ console.timeLog();
 
 console.log('Loading SQL...')
 const sql = await open({
-    filename: dataPath + '/afdb-clusters.sqlite3',
+    filename: dataPath + '/afdb-test.sqlite3',
     driver: sqlite3.Database,
     mode: sqlite3.OPEN_READONLY,
 })
@@ -38,13 +38,13 @@ console.timeLog();
 console.log('Loading Databases...')
 const checkpoints = [];
 const aaDb = new DbReader();
-checkpoints.push(aaDb.make(dataPath + '/afdb', dataPath + '/afdb.index'));
+checkpoints.push(aaDb.make(dataPath + '/test_afesm', dataPath + '/test_afesm.index'));
 
 const caDb = new DbReader();
-checkpoints.push(caDb.make(dataPath + '/afdb_ca', dataPath + '/afdb_ca.index'));
+checkpoints.push(caDb.make(dataPath + '/test_afesm_ca', dataPath + '/test_afesm_ca.index'));
 
 const plddtDB = new DbReader();
-checkpoints.push(plddtDB.make(dataPath + '/afdb_plddt', dataPath + '/afdb_plddt.index'));
+checkpoints.push(plddtDB.make(dataPath + '/test_afesm_plddt', dataPath + '/test_afesm_plddt.index'));
 
 const descDB = new DbReader();
 checkpoints.push(descDB.make(dataPath + '/afdb_desc', dataPath + '/afdb_desc.index'));
@@ -57,6 +57,13 @@ if (existsSync(dataPath + '/warning_db')) {
     warnDB = new DbReader();
     checkpoints.push(warnDB.make(dataPath + '/warning_db', dataPath + '/warning_db.index'));
 }
+
+const biomeMap = Object.fromEntries(
+    readFileSync(dataPath + '/biomeID-biome.tsv', 'utf-8')
+      .trim()
+      .split('\n')
+      .map(line => line.split('\t'))
+  );
 
 await Promise.all(checkpoints);
 console.timeLog();
@@ -510,10 +517,25 @@ app.get('/api/cluster/:cluster', async (req, res) => {
         res.status(404).send({ error: "No cluster found" });
         return;
     }
-    result.lca_tax_id = tree.nodeExists(result.lca_tax_id) ? tree.getNode(result.lca_tax_id) : null;
-    result.lineage = tree.nodeExists(result.lca_tax_id.id) ? tree.lineage(result.lca_tax_id) : null;
-    result.tax_id = tree.nodeExists(result.tax_id) ? tree.getNode(result.tax_id) : null;
-    result.rep_lineage = tree.nodeExists(result.tax_id.id) ? tree.lineage(result.tax_id) : null;
+    console.log(result);
+    
+    if (result.lca_tax_id == 0) {
+        result.lca_tax_id = { id: 0, name: 'None', parent: 0, rank: 'no rank' };
+        result.lineage = [{ id: 0, name: 'None', parent: 0, rank: 'no rank' }];
+    } else {
+        result.lca_tax_id = tree.nodeExists(result.lca_tax_id) ? tree.getNode(result.lca_tax_id) : null;
+        result.lineage = tree.nodeExists(result.lca_tax_id.id) ? tree.lineage(result.lca_tax_id) : null;
+    }
+    if (result.tax_id == 0) {
+        result.tax_id = { id: 0, name: 'None', parent: 0, rank: 'no rank' };
+        result.rep_lineage = [{ id: 0, name: 'None', parent: 0, rank: 'no rank' }];
+    } else {
+        result.tax_id = tree.nodeExists(result.tax_id) ? tree.getNode(result.tax_id) : null;
+        result.rep_lineage = tree.nodeExists(result.tax_id.id) ? tree.lineage(result.tax_id) : null;
+    }
+    // console.log(result);
+    result.biome_lineage = (result.biome_id != 0) ? biomeMap[result.biome_id] : "None";
+    // console.log(result.biome_id)
     result.description = getDescription(result.rep_accession);
     if (warnDB) {
         const warnKey = warnDB.id(result.rep_accession);
@@ -521,6 +543,7 @@ app.get('/api/cluster/:cluster', async (req, res) => {
     } else {
         result.warning = false;
     }
+    // console.log(result);
     res.send(result);
 });
 
@@ -806,9 +829,10 @@ app.get('/api/cluster/:cluster/similars/taxonomy/:suggest', async (req, res) => 
 
 app.get('/api/structure/:structure', async (req, res) => {
     const structure = req.params.structure;
+    console.log(structure)
     const aaKey = aaDb.id(structure);
     if (aaKey.found == false) {
-        throw Error(f`${structure} not found in aa db`);
+        throw Error(`${structure} not found in aa db`);
     }
     const aaLength = aaDb.length(aaKey.value) - 2;
 

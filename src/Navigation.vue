@@ -1,7 +1,7 @@
 <template>
 <v-app-bar app height="48px" fixed clipped-left :class="['ml-0', 'pl-3']">
     <!-- <v-app-bar-nav-icon :input-value="!mini ? 'activated' : undefined" @click.stop="toggleMini"></v-app-bar-nav-icon> -->
-    <v-app-bar-title><router-link to="/" style="color: inherit; text-decoration: none">AFDB Clusters</router-link></v-app-bar-title>
+    <v-app-bar-title><router-link to="/" style="color: inherit; text-decoration: none">AFESM Clusters</router-link></v-app-bar-title>
     <img src="./assets/marv-foldseek-small.png" style="margin-left:8px; display: inline-block; width: 48px;height: 48px;vertical-align: middle" aria-hidden="true" />
 
     <v-spacer></v-spacer>
@@ -42,9 +42,11 @@ export default {
     data: () => ({
         mini: true,
         links: [
-            { title: "Dark enzymes prediction", href: "https://github.com/jurgjn/af-protein-universe" },
+            // { title: "Dark enzymes prediction", href: "https://github.com/jurgjn/af-protein-universe" },
             { title: "Data download", href: "https://afdb-cluster.steineggerlab.workers.dev" },
-            { title: "Beltrao Lab", href: "https://imsb.ethz.ch/research/beltrao.html" },
+            // { title: "Beltrao Lab", href: "https://imsb.ethz.ch/research/beltrao.html" },
+            { title: "UCL Jones Group", href: "http://www0.cs.ucl.ac.uk/staff/D.Jones/" },
+            { title: "Orengo Group", href: "https://www.ucl.ac.uk/orengo-group/" },
             { title: "Steinegger Lab", href: "https://steineggerlab.com/en/" },
         ]
     }),
