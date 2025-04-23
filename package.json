@@ -1,8 +1,8 @@
 {
-  "name": "afdb_clusters",
-  "productName": "AFDB Clusters",
+  "name": "afesm_clusters",
+  "productName": "AFESM Clusters",
   "version": "0.0.0",
-  "author": "Milot Mirdita <milot@mirdita.de>",
+  "author": "Milot Mirdita <milot@mirdita.de>, Jingi Yeo <businessjingi@gmail.com>",
   "description": "",
   "repository": "",
   "license": "GPL-3.0-or-later",

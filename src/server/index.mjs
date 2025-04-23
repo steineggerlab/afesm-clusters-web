@@ -523,7 +523,7 @@ app.get('/api/cluster/:cluster', async (req, res) => {
         res.status(404).send({ error: "No cluster found" });
         return;
     }
-    console.log(result);
+    // console.log(result);
     
     if (result.lca_tax_id == 0) {
         result.lca_tax_id = { id: 0, name: 'None', parent: 0, rank: 'no rank' };
@@ -837,7 +837,7 @@ app.get('/api/cluster/:cluster/similars/taxonomy/:suggest', async (req, res) => 
 
 app.get('/api/structure/:structure', async (req, res) => {
     const structure = req.params.structure;
-    console.log(structure)
+    // console.log(structure)
     const aaKey = aaDb.id(structure);
     if (aaKey.found == false) {
         throw Error(`${structure} not found in aa db`);
