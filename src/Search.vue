@@ -196,6 +196,7 @@ export default {
             query: "MGYP006274345917",
             selectedExample: 1,
             examples: [
+                {id:'MGYP001309520873', desc:'putative Virus specific protein'},
                 {id:'MGYP006274345917', desc:'Phage integrase (Hypersaline)'},
                 {id:'MGYP001251735356', desc:'Novel symmetrical domain'},
                 {id:'MGYP001263772116', desc:'Novel Multidomain protein with TonB'},
