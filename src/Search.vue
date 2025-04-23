@@ -33,7 +33,7 @@
                                 background-color="transparent"
                                 dark
                             >
-                                <v-tab>UniProt</v-tab>
+                                <v-tab>Uniprot, MGnify</v-tab>
                                 <!-- <v-tab>Gene Ontology</v-tab>
                                 <v-tab>Taxonomy</v-tab>
                                 <v-tab>Structure</v-tab> -->
@@ -42,7 +42,7 @@
                                 <v-tab-item>
                                     <v-text-field
                                         outlined
-                                        label="UniProt accession"
+                                        label="Accession"
                                         style="max-width: 400px; margin: 0 auto;"
                                         v-model="query"
                                         :append-icon="inSearch ? $MDI.ProgressWrench : $MDI.Magnify"
