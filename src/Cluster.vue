@@ -88,7 +88,7 @@
                     number of biome annotation
                 </dt>
                 <dd>
-                    {{ response.n_biome ? 'yes' : 'no' }}
+                    {{ response.n_biome }}
                 </dd>
                 </div>
                 <div>
