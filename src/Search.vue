@@ -17,10 +17,10 @@
                             cols="12"
                         >
                             <h1 class="text-h4 font-weight-thin mb-4">
-                                AlphaFold Clusters
+                                AFESM Clusters
                             </h1>
                             <h4 class="subheading">
-                                Investigate the <a href="https://foldseek.com" target="_blank" rel="noopener">Foldseek</a> clustered <a href="https://alphafold.ebi.ac.uk" target="_blank" rel="noopener">AlphaFold database</a>
+                                Investigate the <a href="https://foldseek.com" target="_blank" rel="noopener">Foldseek</a> clustered AFESM (<a href="https://alphafold.ebi.ac.uk" target="_blank" rel="noopener">AlphaFold</a> + <a href="https://esmatlas.com/" target="_blank" rel="noopener">ESMatlas</a>) database
                             </h4>
                             
                             <br>
@@ -34,11 +34,11 @@
                                 dark
                             >
                                 <v-tab>UniProt</v-tab>
-                                <v-tab>Gene Ontology</v-tab>
+                                <!-- <v-tab>Gene Ontology</v-tab>
                                 <v-tab>Taxonomy</v-tab>
-                                <v-tab>Structure</v-tab>
+                                <v-tab>Structure</v-tab> -->
                             </v-tabs>
-                            <v-tabs-items v-model="tab" style="padding: 1em;">
+                            <v-tabs-items v-model="tab" style="padding: 0.5em;">
                                 <v-tab-item>
                                     <v-text-field
                                         outlined
@@ -65,7 +65,7 @@
                                             column
                                             dark
                                             v-model="selectedExample"
-                                            style="max-width: 400px; margin: 0 auto; "
+                                            style="max-width: 500px; margin: 0 auto; "
                                         >
 
                                             <v-chip v-for="item in examples" :key="item.id"
@@ -75,7 +75,7 @@
                                         </v-chip-group>
                                     </template>
                                 </v-tab-item>
-                                <v-tab-item>
+                                <!-- <v-tab-item>
                                     <GoAutocomplete
                                         :append-icon="inSearch ? $MDI.ProgressWrench : $MDI.Magnify"
                                         v-model="queryGo"
@@ -121,7 +121,7 @@
                                 </v-tab-item>
                                 <v-tab-item>
                                     <FoldseekSearchButton @response="searchFoldseek($event)" dark></FoldseekSearchButton>
-                                </v-tab-item>
+                                </v-tab-item> -->
                             </v-tabs-items>
                         </v-col>
                     </v-row>
@@ -139,21 +139,22 @@
                     <v-card-title primary-title class="pt-0 mt-0">
                         
                         <p class="text-subtitle-1 mb-0" style="word-break: break-word;">
-                            Barrio-Hernandez&nbsp;I, Yeo&nbsp;J, Jänes&nbsp;J, Mirdita&nbsp;M, Gilchrist&nbsp;CLM, Wein&nbsp;T, Varadi&nbsp;M, Velankar&nbsp;S, Beltrao&nbsp;P, Steinegger&nbsp;M. 
-                            <a href="https://nature.com/articles/s41586-023-06510-w" target="_blank" rel="noopener">Clustering predicted structures at the scale of the known protein universe.</a>
-                            Nature,&nbsp;2023.
+                            Yeo&nbsp;J, Han&nbsp;Y, Bordin&nbsp;N, Lau&nbsp;AM, Kandathil&nbsp;SM, Kim&nbsp;H, Karin&nbsp;EL, Mirdita&nbsp;M, Jones&nbsp;DT, Orengo&nbsp;C, Steinegger&nbsp;M. 
+<a href="https://doi.org/NN.NN/2025.04.NN.NN" target="_blank" rel="noopener">
+Metagenomic-scale analysis of the predicted protein structure universe.</a> 
+bioRxiv,&nbsp;2025.
                         </p>
                     </v-card-title>
                     </v-flex>
                 </v-card>
 
-                <p class="text-subtitle-1 mb-0 collab">
+                <!-- <p class="text-subtitle-1 mb-0 collab">
                     AFESM Clusters is a collaboration between
                     <a href="https://en.snu.ac.kr/">Seoul National University</a>, the
                     <a href="https://www.ebi.ac.uk/">European Bioinformatics Institute</a>, <br>and the
                     <a href="https://www.sib.swiss/">Swiss Institute of Bioinformatics</a>.
-                </p>
-                <div style="text-align: center; padding-top: 12px; padding-bottom: 40px;">
+                </p> -->
+                <!-- <div style="text-align: center; padding-top: 12px; padding-bottom: 40px;">
                     <a style="margin: 12px" rel="external noopener" target="_blank" href="https://en.snu.ac.kr/" height="128">
                         <img class="logos" src="./assets/snu_logo_opt.svg" height="64"/>
                     </a>
@@ -163,7 +164,7 @@
                     <a style="margin: 12px" rel="external noopener" target="_blank" href="https://www.sib.swiss/" height="128">
                         <img class="logos" src="./assets/logo_sib.svg" height="64"/>
                     </a>
-                </div>
+                </div> -->
             </v-flex>
         </v-layout>
     </v-container>
@@ -192,13 +193,13 @@ export default {
     data() {
         return {
             tab: 0,
-            query: "B4DKH6",
+            query: "MGYP006274345917",
             selectedExample: 1,
             examples: [
-                {id:'A0A849TG76', desc:'predicted \'Transporter\' protein'},
-                {id:'B4DKH6', desc:'Bactericidal permeability-increasing protein'},
-                {id:'A0A1G5ASE0', desc:'Histone (bacteria)'},
-                {id:'A0A1S3QU81', desc:' Gasdermin containing domain'},
+                {id:'MGYP006274345917', desc:'Phage integrase (Hypersaline)'},
+                {id:'MGYP001251735356', desc:'Novel symmetrical domain'},
+                {id:'MGYP001263772116', desc:'Novel Multidomain protein with TonB'},
+                // {id:'A0A1S3QU81', desc:' Gasdermin containing domain'},
             ],
             queryGo: { text: "immune response", value: "GO:0006955" },
             goSearchType: "lower",

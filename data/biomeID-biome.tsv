@@ -1,0 +1,493 @@
+0 None
+1	root
+2	root:Mixed
+3	root:Engineered
+4	root:Engineered:Biogas plant
+5	root:Engineered:Biogas plant:Wet fermentation
+6	root:Engineered:Bioreactor
+7	root:Engineered:Bioreactor:Continuous culture
+8	root:Engineered:Bioreactor:Continuous culture:Marine intertidal flat sediment inoculum
+9	root:Engineered:Bioreactor:Continuous culture:Marine intertidal flat sediment inoculum:Wadden Sea-Germany
+10	root:Engineered:Bioreactor:Continuous culture:Marine sediment inoculum
+11	root:Engineered:Bioreactor:Continuous culture:Marine sediment inoculum:Wadden Sea-Germany
+12	root:Engineered:Bioremediation
+13	root:Engineered:Bioremediation:Hydrocarbon
+14	root:Engineered:Bioremediation:Hydrocarbon:Benzene
+15	root:Engineered:Bioremediation:Hydrocarbon:Benzene:Bioreactor
+16	root:Engineered:Bioremediation:Metal
+17	root:Engineered:Bioremediation:Persistent organic pollutants (POP)
+18	root:Engineered:Bioremediation:Persistent organic pollutants (POP):Polycyclic aromatic hydrocarbons
+19	root:Engineered:Bioremediation:Terephthalate
+20	root:Engineered:Bioremediation:Terephthalate:Wastewater
+21	root:Engineered:Bioremediation:Terephthalate:Wastewater:Activated sludge
+22	root:Engineered:Bioremediation:Terephthalate:Wastewater:Bioreactor
+23	root:Engineered:Bioremediation:Tetrachloroethylene and derivatives
+24	root:Engineered:Bioremediation:Tetrachloroethylene and derivatives:Chloroethene
+25	root:Engineered:Bioremediation:Tetrachloroethylene and derivatives:Chloroethene:Bioreactor
+26	root:Engineered:Bioremediation:Tetrachloroethylene and derivatives:Tetrachloroethylene
+27	root:Engineered:Bioremediation:Tetrachloroethylene and derivatives:Tetrachloroethylene:Bioreactor
+28	root:Engineered:Biotransformation
+29	root:Engineered:Biotransformation:Microbial enhanced oil recovery
+30	root:Engineered:Biotransformation:Microbial solubilization of coal
+31	root:Engineered:Biotransformation:Mixed alcohol bioreactor
+32	root:Engineered:Built environment
+33	root:Engineered:Food production
+34	root:Engineered:Food production:Dairy products
+35	root:Engineered:Food production:Fermented beverages
+36	root:Engineered:Food production:Fermented seafood
+37	root:Engineered:Food production:Fermented vegetables
+38	root:Engineered:Food production:Silage fermentation
+39	root:Engineered:Industrial production
+40	root:Engineered:Industrial production:Engineered product
+41	root:Engineered:Lab enrichment
+42	root:Engineered:Lab enrichment:Defined media
+43	root:Engineered:Lab enrichment:Defined media:Aerobic media
+44	root:Engineered:Lab enrichment:Defined media:Anaerobic media
+45	root:Engineered:Lab enrichment:Defined media:Marine media
+46	root:Engineered:Lab enrichment:Defined media:Marine media:Algoconsortia
+47	root:Engineered:Lab enrichment:Undefined media
+48	root:Engineered:Lab Synthesis
+49	root:Engineered:Lab Synthesis:Genetic cross
+50	root:Engineered:Modeled
+51	root:Engineered:Modeled:Simulated communities (DNA mixture)
+52	root:Engineered:Modeled:Simulated communities (microbial mixture)
+53	root:Engineered:Modeled:Simulated communities (sequence read mixture)
+54	root:Engineered:Modeled:Simulated communities (sequence read mixture):Sanger
+55	root:Engineered:Solid waste
+56	root:Engineered:Solid waste:Composting
+57	root:Engineered:Solid waste:Composting:Grass
+58	root:Engineered:Solid waste:Composting:Grass:Bioreactor
+59	root:Engineered:Solid waste:Composting:Bioreactor
+60	root:Engineered:Solid waste:Composting:Wood
+61	root:Engineered:Solid waste:Composting:Wood:Bioreactor
+62	root:Engineered:Solid waste:Landfill
+63	root:Engineered:Solid waste:Solid animal waste
+64	root:Engineered:Wastewater
+65	root:Engineered:Wastewater:Activated Sludge
+66	root:Engineered:Wastewater:Industrial wastewater
+67	root:Engineered:Wastewater:Industrial wastewater:Agricultural wastewater
+68	root:Engineered:Wastewater:Industrial wastewater:Landfill leachate
+69	root:Engineered:Wastewater:Industrial wastewater:Mine water
+70	root:Engineered:Wastewater:Industrial wastewater:Petrochemical
+71	root:Engineered:Wastewater:Industrial wastewater:Pulp and paper wastewater
+72	root:Engineered:Wastewater:Nutrient removal
+73	root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal
+74	root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal:Activated sludge
+75	root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal:Bioreactor
+76	root:Engineered:Wastewater:Nutrient removal:Dissolved organics (aerobic)
+77	root:Engineered:Wastewater:Nutrient removal:Dissolved organics (aerobic):Activated sludge
+78	root:Engineered:Wastewater:Nutrient removal:Dissolved organics (anaerobic)
+79	root:Engineered:Wastewater:Nutrient removal:Dissolved organics (anaerobic):Activated sludge
+80	root:Engineered:Wastewater:Nutrient removal:Nitrogen removal
+81	root:Engineered:Wastewater:Nutrient removal:Nitrogen removal:Anammox
+82	root:Engineered:Wastewater:Water and sludge
+83	root:Environmental
+84	root:Environmental:Air
+85	root:Environmental:Air:Indoor Air
+86	root:Environmental:Air:Outdoor Air
+87	root:Environmental:Aquatic
+88	root:Environmental:Aquatic:Aquaculture
+89	root:Environmental:Aquatic:Estuary
+90	root:Environmental:Aquatic:Estuary:Sediment
+91	root:Environmental:Aquatic:Freshwater
+92	root:Environmental:Aquatic:Freshwater:Drinking water
+93	root:Environmental:Aquatic:Freshwater:Drinking water:Chlorinated
+94	root:Environmental:Aquatic:Freshwater:Drinking water:Delivery networks
+95	root:Environmental:Aquatic:Freshwater:Groundwater
+96	root:Environmental:Aquatic:Freshwater:Groundwater:Acid Mine Drainage
+97	root:Environmental:Aquatic:Freshwater:Groundwater:Biofilm
+98	root:Environmental:Aquatic:Freshwater:Groundwater:Cave water
+99	root:Environmental:Aquatic:Freshwater:Groundwater:Coalbed water
+100	root:Environmental:Aquatic:Freshwater:Groundwater:Contaminated
+101	root:Environmental:Aquatic:Freshwater:Groundwater:Mine
+102	root:Environmental:Aquatic:Freshwater:Groundwater:Mine drainage
+103	root:Environmental:Aquatic:Freshwater:Ice
+104	root:Environmental:Aquatic:Freshwater:Ice:Glacial lake
+105	root:Environmental:Aquatic:Freshwater:Ice:Glacier
+106	root:Environmental:Aquatic:Freshwater:Ice:Ice accretions
+107	root:Environmental:Aquatic:Freshwater:Lake
+108	root:Environmental:Aquatic:Freshwater:Lentic
+109	root:Environmental:Aquatic:Freshwater:Lentic:Epilimnion
+110	root:Environmental:Aquatic:Freshwater:Lentic:Hypolimnion
+111	root:Environmental:Aquatic:Freshwater:Lentic:Limnetic zone
+112	root:Environmental:Aquatic:Freshwater:Lentic:Littoral zone
+113	root:Environmental:Aquatic:Freshwater:Lentic:Sediment
+114	root:Environmental:Aquatic:Freshwater:Lotic
+115	root:Environmental:Aquatic:Freshwater:Lotic:Acidic
+116	root:Environmental:Aquatic:Freshwater:Lotic:Low land river systems
+117	root:Environmental:Aquatic:Freshwater:Lotic:Microbial mats
+118	root:Environmental:Aquatic:Freshwater:Lotic:Mid stream
+119	root:Environmental:Aquatic:Freshwater:Lotic:Sediment
+120	root:Environmental:Aquatic:Freshwater:Microbialites
+121	root:Environmental:Aquatic:Freshwater:Pond
+122	root:Environmental:Aquatic:Freshwater:Pond:Sediment
+123	root:Environmental:Aquatic:Freshwater:Sediment
+124	root:Environmental:Aquatic:Freshwater:Storm water
+125	root:Environmental:Aquatic:Freshwater:Storm water:Drainage pipe biofilm
+126	root:Environmental:Aquatic:Freshwater:Subglacial lake
+127	root:Environmental:Aquatic:Freshwater:Wetlands
+128	root:Environmental:Aquatic:Freshwater:Wetlands:Bog
+129	root:Environmental:Aquatic:Freshwater:Wetlands:Marsh
+130	root:Environmental:Aquatic:Freshwater:Wetlands:Sediment
+131	root:Environmental:Aquatic:Freshwater:Wetlands:Swamp
+132	root:Environmental:Aquatic:Lentic
+133	root:Environmental:Aquatic:Lentic:Brackish
+134	root:Environmental:Aquatic:Marine
+135	root:Environmental:Aquatic:Marine:Brackish
+136	root:Environmental:Aquatic:Marine:Coastal
+137	root:Environmental:Aquatic:Marine:Coastal:Sediment
+138	root:Environmental:Aquatic:Marine:Cold seeps
+139	root:Environmental:Aquatic:Marine:Cold seeps:Sediment
+140	root:Environmental:Aquatic:Marine:Fossil
+141	root:Environmental:Aquatic:Marine:Fossil:Whale fall
+142	root:Environmental:Aquatic:Marine:Hydrothermal vents
+143	root:Environmental:Aquatic:Marine:Hydrothermal vents:Black smokers
+144	root:Environmental:Aquatic:Marine:Hydrothermal vents:Diffuse flow
+145	root:Environmental:Aquatic:Marine:Hydrothermal vents:Microbial mats
+146	root:Environmental:Aquatic:Marine:Hydrothermal vents:Sediment
+147	root:Environmental:Aquatic:Marine:Intertidal zone
+148	root:Environmental:Aquatic:Marine:Intertidal zone:Beach
+149	root:Environmental:Aquatic:Marine:Intertidal zone:Coral reef
+150	root:Environmental:Aquatic:Marine:Intertidal zone:Estuary
+151	root:Environmental:Aquatic:Marine:Intertidal zone:Mangrove swamp
+152	root:Environmental:Aquatic:Marine:Intertidal zone:Microbialites
+153	root:Environmental:Aquatic:Marine:Intertidal zone:Oil-contaminated
+154	root:Environmental:Aquatic:Marine:Intertidal zone:Salt marsh
+155	root:Environmental:Aquatic:Marine:Intertidal zone:Sediment
+156	root:Environmental:Aquatic:Marine:Marginal Sea
+157	root:Environmental:Aquatic:Marine:Neritic zone
+158	root:Environmental:Aquatic:Marine:Neritic zone:Oil-contaminated sediment
+159	root:Environmental:Aquatic:Marine:Neritic zone:Sediment
+160	root:Environmental:Aquatic:Marine:Oceanic
+161	root:Environmental:Aquatic:Marine:Oceanic:Abyssal plane
+162	root:Environmental:Aquatic:Marine:Oceanic:Aphotic zone
+163	root:Environmental:Aquatic:Marine:Oceanic:Benthic
+164	root:Environmental:Aquatic:Marine:Oceanic:Oil-contaminated
+165	root:Environmental:Aquatic:Marine:Oceanic:Oil-contaminated sediments
+166	root:Environmental:Aquatic:Marine:Oceanic:Photic zone
+167	root:Environmental:Aquatic:Marine:Oceanic:Sediment
+168	root:Environmental:Aquatic:Marine:Oil field
+169	root:Environmental:Aquatic:Marine:Oil field:bore hole
+170	root:Environmental:Aquatic:Marine:Oil seeps
+171	root:Environmental:Aquatic:Marine:Pelagic
+172	root:Environmental:Aquatic:Marine:Oil-contaminated sediment
+173	root:Environmental:Aquatic:Marine:Sediment
+174	root:Environmental:Aquatic:Marine:Volcanic
+175	root:Environmental:Aquatic:Marine:Wetlands
+176	root:Environmental:Aquatic:Marine:Wetlands:Sediment
+177	root:Environmental:Aquatic:Meromictic lake
+178	root:Environmental:Aquatic:Non-marine Saline and Alkaline
+179	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Alkaline
+180	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Alkaline:Carbonate
+181	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Alkaline:Microbial mats
+182	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Alkaline:Sediment
+183	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Hypersaline
+184	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Hypersaline:Microbial mats
+185	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Hypersaline:Sediment
+186	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Near-boiling (>90C)
+187	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Near-boiling (>90C):Alkaline
+188	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline
+189	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline:Athalassic
+190	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline:Epilimnion
+191	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline:Hypolimnion
+192	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline:Microbial mats
+193	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline:Sediment
+194	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline:Thalassic
+195	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Salt crystallizer pond
+196	root:Environmental:Aquatic:Non-marine Saline and Alkaline:Salt crystallizer pond:Microbial mats
+197	root:Environmental:Aquatic:Sediment
+198	root:Environmental:Aquatic:Thermal springs
+199	root:Environmental:Aquatic:Thermal springs:Hot (42-90C)
+200	root:Environmental:Aquatic:Thermal springs:Hot (42-90C):Acidic
+201	root:Environmental:Aquatic:Thermal springs:Hot (42-90C):Alkaline
+202	root:Environmental:Aquatic:Thermal springs:Hot (42-90C):Neutral
+203	root:Environmental:Aquatic:Thermal springs:Hot (42-90C):Sediment
+204	root:Environmental:Aquatic:Thermal springs:Near-boiling (>90C)
+205	root:Environmental:Aquatic:Thermal springs:Near-boiling (>90C):Alkaline
+206	root:Environmental:Aquatic:Thermal springs:Sediment
+207	root:Environmental:Aquatic:Thermal springs:Tepid (25-34C)
+208	root:Environmental:Aquatic:Thermal springs:Tepid (25-34C):Sediment
+209	root:Environmental:Aquatic:Thermal springs:Warm (34-42C)
+210	root:Environmental:Aquatic:Thermal springs:Warm (34-42C):Neutral
+211	root:Environmental:Aquatic:Thermal springs:Warm (34-42C):Sediment
+212	root:Environmental:Terrestrial
+213	root:Environmental:Terrestrial:Agricultural field
+214	root:Environmental:Terrestrial:Asphalt lakes
+215	root:Environmental:Terrestrial:Asphalt lakes:Tar
+216	root:Environmental:Terrestrial:Deep subsurface
+217	root:Environmental:Terrestrial:Deep subsurface:Clay
+218	root:Environmental:Terrestrial:Geologic
+219	root:Environmental:Terrestrial:Geologic:Mine
+220	root:Environmental:Terrestrial:Oil reservoir
+221	root:Environmental:Terrestrial:Rock-dwelling (subaerial biofilm)
+222	root:Environmental:Terrestrial:Soil
+223	root:Environmental:Terrestrial:Soil:Clay
+224	root:Environmental:Terrestrial:Soil:Clay:Agricultural land
+225	root:Environmental:Terrestrial:Soil:Clay:Contaminated
+226	root:Environmental:Terrestrial:Soil:Clay:Grasslands
+227	root:Environmental:Terrestrial:Soil:Clay:Oil-contaminated
+228	root:Environmental:Terrestrial:Soil:Crop
+229	root:Environmental:Terrestrial:Soil:Crop:Agricultural land
+230	root:Environmental:Terrestrial:Soil:Loam
+231	root:Environmental:Terrestrial:Soil:Loam:Agricultural
+232	root:Environmental:Terrestrial:Soil:Loam:Contaminated
+233	root:Environmental:Terrestrial:Soil:Loam:Forest soil
+234	root:Environmental:Terrestrial:Soil:Loam:Grasslands
+235	root:Environmental:Terrestrial:Soil:Sand
+236	root:Environmental:Terrestrial:Soil:Sand:Desert
+237	root:Environmental:Terrestrial:Soil:Sand:Forest soil
+238	root:Environmental:Terrestrial:Soil:Sand:Grasslands
+239	root:Environmental:Terrestrial:Soil:Sand:Oil-contaminated
+240	root:Environmental:Terrestrial:Soil:Silt
+241	root:Environmental:Terrestrial:Soil:Agricultural
+242	root:Environmental:Terrestrial:Soil:Boreal forest
+243	root:Environmental:Terrestrial:Soil:Contaminated
+244	root:Environmental:Terrestrial:Soil:Desert
+245	root:Environmental:Terrestrial:Soil:Forest soil
+246	root:Environmental:Terrestrial:Soil:Grasslands
+247	root:Environmental:Terrestrial:Soil:Mine
+248	root:Environmental:Terrestrial:Soil:Mine drainage
+249	root:Environmental:Terrestrial:Soil:Oil-contaminated
+250	root:Environmental:Terrestrial:Soil:Permafrost
+251	root:Environmental:Terrestrial:Soil:Shrubland
+252	root:Environmental:Terrestrial:Soil:Tropical rainforest
+253	root:Environmental:Terrestrial:Soil:Uranium contaminated
+254	root:Environmental:Terrestrial:Soil:Viriome
+255	root:Environmental:Terrestrial:Soil:Wetlands
+256	root:Environmental:Terrestrial:Soil:Wetlands:Permafrost
+257	root:Environmental:Terrestrial:Volcanic
+258	root:Environmental:Terrestrial:Volcanic:Fumaroles
+259	root:Host-associated
+260	root:Host-associated:Algae
+261	root:Host-associated:Algae:Brown Algae
+262	root:Host-associated:Algae:Green algae
+263	root:Host-associated:Algae:Green algae:Ectosymbionts
+264	root:Host-associated:Algae:Red algae
+265	root:Host-associated:Algae:Red algae:Ectosymbionts
+266	root:Host-associated:Amphibia
+267	root:Host-associated:Amphibia:Digestive system
+268	root:Host-associated:Amphibia:Excretory system
+269	root:Host-associated:Animal
+270	root:Host-associated:Animal:Circulatory system
+271	root:Host-associated:Animal:Digestive system
+272	root:Host-associated:Animal:Digestive system:Fecal
+273	root:Host-associated:Animal:Fossil
+274	root:Host-associated:Animal:Fossil:Bone
+275	root:Host-associated:Animal:Fossil:Feces
+276	root:Host-associated:Animal:Reproductive system
+277	root:Host-associated:Animal:Respiratory system
+278	root:Host-associated:Animal:Skin
+279	root:Host-associated:Annelida
+280	root:Host-associated:Annelida:Digestive system
+281	root:Host-associated:Annelida:Digestive system:Digestive tube
+282	root:Host-associated:Annelida:Digestive system:Digestive tube:Extracellular symbionts
+283	root:Host-associated:Annelida:Integument
+284	root:Host-associated:Annelida:Integument:Cuticle
+285	root:Host-associated:Annelida:Integument:Cuticle:Epibionts
+286	root:Host-associated:Annelida:Integument:Subcuticular space
+287	root:Host-associated:Annelida:Integument:Subcuticular space:Extracellular symbionts
+288	root:Host-associated:Annelida:Intracellular endosymbionts
+289	root:Host-associated:Annelida:Intracellular endosymbionts:Trophosome
+290	root:Host-associated:Annelida:Reproductive system
+291	root:Host-associated:Annelida:Reproductive system:Egg capsule
+292	root:Host-associated:Annelida:Reproductive system:Egg capsule:Extracellular
+293	root:Host-associated:Arthropoda
+294	root:Host-associated:Arthropoda:Digestive system
+295	root:Host-associated:Arthropoda:Digestive system:Foregut
+296	root:Host-associated:Arthropoda:Digestive system:Gut
+297	root:Host-associated:Arthropoda:Digestive system:Gut:P3 segment
+298	root:Host-associated:Arthropoda:Digestive system:Gut:Proctodeal segment
+299	root:Host-associated:Arthropoda:Digestive system:Hindgut
+300	root:Host-associated:Arthropoda:Digestive system:Hindgut:P1 segment
+301	root:Host-associated:Arthropoda:Digestive system:Hindgut:P3 segment
+302	root:Host-associated:Arthropoda:Digestive system:Midgut
+303	root:Host-associated:Arthropoda:Digestive system:Oral
+304	root:Host-associated:Arthropoda:Digestive system:Oral:Saliva
+305	root:Host-associated:Arthropoda:Integument
+306	root:Host-associated:Arthropoda:Integument:Cuticle
+307	root:Host-associated:Arthropoda:Integument:Cuticle:Thoracic segments
+308	root:Host-associated:Arthropoda:Intracellular endosymbionts
+309	root:Host-associated:Arthropoda:Intracellular endosymbionts:Primary
+310	root:Host-associated:Arthropoda:Intracellular endosymbionts:Primary:Bacteriomes
+311	root:Host-associated:Arthropoda:Intracellular endosymbionts:Secondary
+312	root:Host-associated:Arthropoda:Oral cavity
+313	root:Host-associated:Arthropoda:Respiratory system
+314	root:Host-associated:Arthropoda:Respiratory system:Gills
+315	root:Host-associated:Arthropoda:Symbiotic fungal gardens and galleries
+316	root:Host-associated:Arthropoda:Symbiotic fungal gardens and galleries:Fungus gallery
+317	root:Host-associated:Arthropoda:Symbiotic fungal gardens and galleries:Fungus garden
+318	root:Host-associated:Arthropoda:Symbiotic fungal gardens and galleries:Fungus garden:Garden dump
+319	root:Host-associated:Arthropoda:Venom gland
+320	root:Host-associated:Arthropoda:Venom gland:Venom
+321	root:Host-associated:Birds
+322	root:Host-associated:Birds:Circulatory system
+323	root:Host-associated:Birds:Circulatory system:Blood
+324	root:Host-associated:Birds:Digestive system
+325	root:Host-associated:Birds:Digestive system:Ceca
+326	root:Host-associated:Birds:Digestive system:Ceca:Lumen
+327	root:Host-associated:Birds:Digestive system:Crop
+328	root:Host-associated:Birds:Digestive system:Crop:Lumen
+329	root:Host-associated:Birds:Digestive system:Digestive tube
+330	root:Host-associated:Birds:Digestive system:Digestive tube:Cecum
+331	root:Host-associated:Birds:Digestive system:Fecal
+332	root:Host-associated:Birds:Digestive system:Small intestine
+333	root:Host-associated:Birds:Digestive system:Small intestine:Duodenal
+334	root:Host-associated:Birds:Reproductive system
+335	root:Host-associated:Birds:Respiratory system
+336	root:Host-associated:Birds:Respiratory system:Lungs
+337	root:Host-associated:Cnidaria
+338	root:Host-associated:Echinodermata
+339	root:Host-associated:Endosymbionts
+340	root:Host-associated:Endosymbionts:Fungi
+341	root:Host-associated:Endosymbionts:Fungi:Endosymbionts
+342	root:Host-associated:Fish
+343	root:Host-associated:Fish:Circulatory system
+344	root:Host-associated:Fish:Circulatory system:Blood
+345	root:Host-associated:Fish:Digestive system
+346	root:Host-associated:Fish:Digestive system:Foregut
+347	root:Host-associated:Fish:Digestive system:Foregut:Uncharacterized
+348	root:Host-associated:Fish:Digestive system:Intestine
+349	root:Host-associated:Fish:Excretory system
+350	root:Host-associated:Fish:Excretory system:Kidneys
+351	root:Host-associated:Fish:Reproductive system
+352	root:Host-associated:Fish:Skin
+353	root:Host-associated:Fish:Skin:Slime
+354	root:Host-associated:Fungi
+355	root:Host-associated:Human
+356	root:Host-associated:Human:Circulatory system
+357	root:Host-associated:Human:Circulatory system:Blood
+358	root:Host-associated:Human:Digestive system
+359	root:Host-associated:Human:Digestive system:Hindgut
+360	root:Host-associated:Human:Digestive system:Hindgut:Rectum
+361	root:Host-associated:Human:Digestive system:Intestine
+362	root:Host-associated:Human:Digestive system:Large intestine
+363	root:Host-associated:Human:Digestive system:Large intestine:Fecal
+364	root:Host-associated:Human:Digestive system:Large intestine:Sigmoid colon
+365	root:Host-associated:Human:Digestive system:Oral
+366	root:Host-associated:Human:Digestive system:Oral:Attached Keratinized gingiva
+367	root:Host-associated:Human:Digestive system:Oral:buccal mucosa
+368	root:Host-associated:Human:Digestive system:Oral:hard palate
+369	root:Host-associated:Human:Digestive system:Oral:Palatine tonsils
+370	root:Host-associated:Human:Digestive system:Oral:Periodontal pockets
+371	root:Host-associated:Human:Digestive system:Oral:Saliva
+372	root:Host-associated:Human:Digestive system:Oral:Subgingival plaque
+373	root:Host-associated:Human:Digestive system:Oral:Supragingival plaque
+374	root:Host-associated:Human:Digestive system:Oral:Throat
+375	root:Host-associated:Human:Digestive system:Oral:tongue dorsum
+376	root:Host-associated:Human:Excretory system
+377	root:Host-associated:Human:Excretory system:Urethra
+378	root:Host-associated:Human:Excretory system:Urethra:Urine
+379	root:Host-associated:Human:Fossil
+380	root:Host-associated:Human:Fossil:Bone
+381	root:Host-associated:Human:Lympathic system
+382	root:Host-associated:Human:Lympathic system:Lymph nodes
+383	root:Host-associated:Human:Milk
+384	root:Host-associated:Human:Nervous system
+385	root:Host-associated:Human:Nervous system:Cerebrospinal fluid
+386	root:Host-associated:Human:Reproductive system
+387	root:Host-associated:Human:Reproductive system:Female
+388	root:Host-associated:Human:Reproductive system:Vagina
+389	root:Host-associated:Human:Reproductive system:Vagina:Introitus
+390	root:Host-associated:Human:Reproductive system:Vagina:Midpoint vagina
+391	root:Host-associated:Human:Reproductive system:Vagina:posterior fornix
+392	root:Host-associated:Human:Respiratory system
+393	root:Host-associated:Human:Respiratory system:Nasopharyngeal
+394	root:Host-associated:Human:Respiratory system:Nasopharyngeal:anterior nares
+395	root:Host-associated:Human:Respiratory system:Nasopharyngeal:Nasal cavity
+396	root:Host-associated:Human:Respiratory system:Nasopharyngeal:Pharynx
+397	root:Host-associated:Human:Respiratory system:Pulmonary system
+398	root:Host-associated:Human:Respiratory system:Pulmonary system:Lung
+399	root:Host-associated:Human:Respiratory system:Pulmonary system:Sputum
+400	root:Host-associated:Human:Respiratory system:Pulmonary system:Trachea
+401	root:Host-associated:Human:Respiratory system:Pulmonary system:Viriome
+402	root:Host-associated:Human:Skin
+403	root:Host-associated:Human:Skin:Axilla
+404	root:Host-associated:Human:Skin:Medial distal leg
+405	root:Host-associated:Human:Skin:Medial distal leg:Venous leg ulcers
+406	root:Host-associated:Human:Skin:Naris
+407	root:Host-associated:Human:Skin:retroauricular crease
+408	root:Host-associated:Human:Skin:Umbilicus
+409	root:Host-associated:Human:Skin:Volar forearm
+410	root:Host-associated:Insecta
+411	root:Host-associated:Insecta:Digestive system
+412	root:Host-associated:Invertebrates
+413	root:Host-associated:Invertebrates:Bryozoans
+414	root:Host-associated:Invertebrates:Bryozoans:Gymnolaemates
+415	root:Host-associated:Invertebrates:Cnidaria
+416	root:Host-associated:Invertebrates:Cnidaria:Coral
+417	root:Host-associated:Invertebrates:Echinodermata
+418	root:Host-associated:Invertebrates:Echinodermata:Sea Urchin
+419	root:Host-associated:Mammals
+420	root:Host-associated:Mammals:Circulatory system
+421	root:Host-associated:Mammals:Circulatory system:Blood
+422	root:Host-associated:Mammals:Digestive system
+423	root:Host-associated:Mammals:Digestive system:Fecal
+424	root:Host-associated:Mammals:Digestive system:Fecal:Uncharacterized
+425	root:Host-associated:Mammals:Digestive system:Foregut
+426	root:Host-associated:Mammals:Digestive system:Foregut:Rumen
+427	root:Host-associated:Mammals:Digestive system:Large intestine
+428	root:Host-associated:Mammals:Digestive system:Large intestine:Cecum
+429	root:Host-associated:Mammals:Digestive system:Large intestine:Fecal
+430	root:Host-associated:Mammals:Digestive system:Midgut
+431	root:Host-associated:Mammals:Digestive system:Oral cavity
+432	root:Host-associated:Mammals:Digestive system:Oral cavity:Buccal mucosa
+433	root:Host-associated:Mammals:Digestive system:Stomach
+434	root:Host-associated:Mammals:Digestive system:Stomach:Endoperitrophic space
+435	root:Host-associated:Mammals:Digestive system:Stomach:Rumen
+436	root:Host-associated:Mammals:Excretory system
+437	root:Host-associated:Mammals:Excretory system:Urine
+438	root:Host-associated:Mammals:Gastrointestinal tract
+439	root:Host-associated:Mammals:Gastrointestinal tract:Intestine
+440	root:Host-associated:Mammals:Gastrointestinal tract:Intestine:Fecal
+441	root:Host-associated:Mammals:Lymphatic
+442	root:Host-associated:Mammals:Lymphatic:Lymph nodes
+443	root:Host-associated:Mammals:Milk
+444	root:Host-associated:Mammals:Nervous system
+445	root:Host-associated:Mammals:Nervous system:Brain
+446	root:Host-associated:Mammals:Reproductive system
+447	root:Host-associated:Mammals:Respiratory system
+448	root:Host-associated:Mammals:Respiratory system:Nasopharyngeal
+449	root:Host-associated:Mammals:Respiratory system:Nasopharyngeal:Nasal cavity
+450	root:Host-associated:Mammals:Respiratory system:Pulmonary system
+451	root:Host-associated:Mammals:Respiratory system:Pulmonary system:Viriome
+452	root:Host-associated:Mammals:Skin
+453	root:Host-associated:Microbial
+454	root:Host-associated:Microbial:Bacteria
+455	root:Host-associated:Microbial:Dinoflagellates
+456	root:Host-associated:Microbial:Dinoflagellates:Endosymbionts
+457	root:Host-associated:Mollusca
+458	root:Host-associated:Mollusca:Digestive system
+459	root:Host-associated:Mollusca:Digestive system:Ceca
+460	root:Host-associated:Mollusca:Digestive system:Ceca:Uncharacterized
+461	root:Host-associated:Mollusca:Digestive system:Glands
+462	root:Host-associated:Mollusca:Respiratory system
+463	root:Host-associated:Mollusca:Respiratory system:Gills
+464	root:Host-associated:Mollusca:Respiratory system:Gills:Extracellular
+465	root:Host-associated:Mollusca:Respiratory system:Gills:Intracellular
+466	root:Host-associated:Mollusca:Shell
+467	root:Host-associated:Plants
+468	root:Host-associated:Plants:Phylloplane
+469	root:Host-associated:Plants:Phylloplane:Endophytes
+470	root:Host-associated:Plants:Phylloplane:Epiphytes
+471	root:Host-associated:Plants:Rhizome
+472	root:Host-associated:Plants:Rhizome:Epiphytes
+473	root:Host-associated:Plants:Rhizoplane
+474	root:Host-associated:Plants:Rhizoplane:Endophytes
+475	root:Host-associated:Plants:Rhizoplane:Epiphytes
+476	root:Host-associated:Plants:Rhizoplane:Soil
+477	root:Host-associated:Plants:Rhizosphere
+478	root:Host-associated:Plants:Rhizosphere:Epiphytes
+479	root:Host-associated:Plants:Rhizosphere:Soil
+480	root:Host-associated:Plants:Rhizosphere:Forest soil
+481	root:Host-associated:Plants:Root
+482	root:Host-associated:Porifera
+483	root:Host-associated:Protists
+484	root:Host-associated:Protozoa
+485	root:Host-associated:Reptile
+486	root:Host-associated:Reptile:Oral cavity
+487	root:Host-associated:Reptile:Oral cavity:Venom gland
+488	root:Host-associated:Reptile:Oral cavity:Venom gland:Venom
+489	root:Host-associated:Spiralia
+490	root:Host-associated:Tunicates
+491	root:Host-associated:Tunicates:Ascidians
+492	root:Control

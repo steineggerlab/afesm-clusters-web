@@ -7,7 +7,7 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
         <v-btn v-for="link in links" :key="link.title" text :href="link.href" rel="external noopener" target="_blank">{{ link.title }}</v-btn>
-        <v-btn icon rel="external noopener" target="_blank" href="https://github.com/steineggerlab/afdb-clusters-analysis">
+        <v-btn icon rel="external noopener" target="_blank" href="https://github.com/steineggerlab/afesm-analysis">
             <v-icon>{{ $MDI.GitHub }}</v-icon>
         </v-btn>
     </v-toolbar-items>
@@ -27,7 +27,7 @@
               <v-list-item-title>{{ link.title }}</v-list-item-title>
              </v-list-item-content>
           </v-list-item>
-          <v-list-item rel="external noopener" target="_blank" href="https://github.com/steineggerlab/afdb-clusters-analysis">
+          <v-list-item rel="external noopener" target="_blank" href="https://github.com/steineggerlab/afesm-analysis">
             <v-list-item-content>
               <v-list-item-title>GitHub</v-list-item-title>
             </v-list-item-content>
@@ -43,7 +43,7 @@ export default {
         mini: true,
         links: [
             // { title: "Dark enzymes prediction", href: "https://github.com/jurgjn/af-protein-universe" },
-            { title: "Data download", href: "https://afdb-cluster.steineggerlab.workers.dev" },
+            { title: "Data download", href: "https://afesm.steineggerlab.workers.dev/" },
             // { title: "Beltrao Lab", href: "https://imsb.ethz.ch/research/beltrao.html" },
             { title: "UCL Jones Group", href: "http://www0.cs.ucl.ac.uk/staff/D.Jones/" },
             { title: "Orengo Group", href: "https://www.ucl.ac.uk/orengo-group/" },
