@@ -29,7 +29,7 @@ console.timeLog();
 
 console.log('Loading SQL...')
 const sql = await open({
-    filename: dataPath + '/afdb-test.sqlite3',
+    filename: dataPath + '/afesm.sqlite3',
     driver: sqlite3.Database,
     mode: sqlite3.OPEN_READONLY,
 })
@@ -38,19 +38,21 @@ console.timeLog();
 console.log('Loading Databases...')
 const checkpoints = [];
 const aaDb = new DbReader();
-checkpoints.push(aaDb.make(dataPath + '/test_afesm', dataPath + '/test_afesm.index'));
+checkpoints.push(aaDb.make(dataPath + '/afesm', dataPath + '/afesm.index'));
 
 const caDb = new DbReader();
-checkpoints.push(caDb.make(dataPath + '/test_afesm_ca', dataPath + '/test_afesm_ca.index'));
+checkpoints.push(caDb.make(dataPath + '/afesm_ca', dataPath + '/afesm_ca.index'));
 
 const plddtDB = new DbReader();
-checkpoints.push(plddtDB.make(dataPath + '/test_afesm_plddt', dataPath + '/test_afesm_plddt.index'));
+checkpoints.push(plddtDB.make(dataPath + '/afesm_plddt', dataPath + '/afesm_plddt.index'));
 
+/*
 const descDB = new DbReader();
 checkpoints.push(descDB.make(dataPath + '/afdb_desc', dataPath + '/afdb_desc.index'));
 
 const avaDb = new DbReader();
 checkpoints.push(avaDb.make(dataPath + '/ava_db', dataPath + '/ava_db.index'));
+*/
 
 let warnDB = null;
 if (existsSync(dataPath + '/warning_db')) {
@@ -69,6 +71,7 @@ await Promise.all(checkpoints);
 console.timeLog();
 
 function getDescription(accession) {
+    return "";
     let descId = descDB.id(accession);
     if (descId.found == false) {
         return "";
@@ -493,6 +496,9 @@ app.get('/api/cluster/:cluster/sankey-members', async (req, res) => {
 });
 
 app.get('/api/cluster/:cluster/sankey-similars', async (req, res) => {
+    res.send({result: null});
+    return;
+
     const cluster = req.params.cluster;
     const avaKey = avaDb.id(cluster);
     if (avaKey.found == false) {
@@ -685,6 +691,8 @@ app.get('/api/cluster/:cluster/members/taxonomy/:suggest', async (req, res) => {
 });
 
 app.get('/api/cluster/:cluster/similars', async (req, res) => {
+    res.send([]);
+    return;
     const cluster = req.params.cluster;
     const avaKey = avaDb.id(cluster);
     if (avaKey.found == false) {
