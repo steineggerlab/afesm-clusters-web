@@ -157,7 +157,7 @@ export default {
                     text: "Accession",
                     value: "accession",
                     sortable: false,
-                    width: "35%",
+                    width: "15%",
                 },
                 // {
                 //     text: "Length",
@@ -174,7 +174,13 @@ export default {
                     text: "Taxonomy",
                     value: "tax_id",
                     sortable: false,
-                    width: "40%",
+                    width: "30%",
+                },
+                {
+                    text: "Biome",
+                    value: "biome_lineage",
+                    sortable: false,
+                    width: "30%",
                 },
                 {
                     text: 'Actions',
@@ -244,6 +250,7 @@ export default {
                     console.log(this.members);
                     this.totalMembers = response.data.total;
                     this.fetchImages(this.members.map(m => m.accession));
+                    console.log(this.members)
                 })
                 .catch(() => {})
                 .finally(() => {

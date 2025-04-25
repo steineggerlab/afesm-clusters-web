@@ -577,7 +577,7 @@ app.get('/api/cluster/:cluster/members', async (req, res) => {
     let total = 0;
     if (req.query.tax_id) {
         result = await sql.all(`
-        SELECT accession, tax_id, flag
+        SELECT accession, tax_id, flag, biome_id
             FROM member
             WHERE rep_accession = ? ${flagFilter}
             ORDER BY rowid;
@@ -595,6 +595,8 @@ app.get('/api/cluster/:cluster/members', async (req, res) => {
                 }
                 currNode = tree.getNode(currNode.parent);
             }
+            x.biome_lineage = (x.biome_id != 0) ? biomeMap[x.biome_id] : "None";
+            // console.log(x)
             return false;
         });
         
@@ -615,7 +617,7 @@ app.get('/api/cluster/:cluster/members', async (req, res) => {
             paginate_query = "LIMIT ? OFFSET ?";
         }
         result = await sql.all(`
-        SELECT accession, tax_id, flag
+        SELECT accession, tax_id, flag, biome_id
             FROM member
             WHERE rep_accession = ? ${flagFilter}
             ORDER BY rowid
@@ -624,6 +626,8 @@ app.get('/api/cluster/:cluster/members', async (req, res) => {
         result.forEach((x) => {
             x.tax_id = tree.nodeExists(x.tax_id) ? tree.getNode(x.tax_id) : null;
             x.description = getDescription(x.accession);
+            x.biome_lineage = (x.biome_id != 0) ? biomeMap[x.biome_id] : "None";
+            // console.log(x)
         });
     }
 
