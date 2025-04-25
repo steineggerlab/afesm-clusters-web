@@ -523,7 +523,7 @@ app.get('/api/cluster/:cluster', async (req, res) => {
         res.status(404).send({ error: "No cluster found" });
         return;
     }
-    // console.log(result);
+    console.log(result);
     
     if (result.lca_tax_id == 0) {
         result.lca_tax_id = { id: 0, name: 'None', parent: 0, rank: 'no rank' };
@@ -540,7 +540,7 @@ app.get('/api/cluster/:cluster', async (req, res) => {
         result.rep_lineage = tree.nodeExists(result.tax_id.id) ? tree.lineage(result.tax_id) : null;
     }
     // console.log(result);
-    result.biome_lineage = (result.biome_id != 0) ? biomeMap[result.biome_id] : "None";
+    result.biome_lineage = (result.lcb_id != 0) ? biomeMap[result.lcb_id] : "None";
     // console.log(result.biome_id)
     result.description = getDescription(result.rep_accession);
     if (warnDB) {
