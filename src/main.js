@@ -54,6 +54,7 @@ const router = new VueRouter({
         { path: '/', redirect: { name: 'search' } },
         { name: 'search', path: '/', component: Search },
         { name: 'go', path: '/go/:go/:type', component: Search },
+        { name: 'biome', path: '/biome/:biome/:type', component: Search },
         { name: 'lca', path: '/lca/:taxid/:type', component: Search },
         { name: 'foldseek', path: '/foldseek/:jobid', component: Search },
         { name: 'cluster', path: '/cluster/:cluster', component: Cluster },

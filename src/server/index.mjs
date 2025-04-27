@@ -214,6 +214,60 @@ app.get('/api/search/go/:taxonomy?', async (req, res) => {
     return finalizeResult(result, req, res);
 });
 
+app.get('/api/search/biome/:taxonomy?', async (req, res) => {
+    console.log("biome", req.query)
+    const go_search_type = req.query.biome_search_type;
+    let biome = req.query.query_Biome;
+
+    const is_only_esm = req.query.is_only_esm;
+    let filter_params = [];
+    for (let i of ['avg_length_range', 'avg_plddt_range', 'n_mem_range', 'rep_length_range', 'rep_plddt_range']) {
+        if (typeof(req.query[i]) == "undefined") {
+            filter_params.push('0');
+            filter_params.push('INF');
+        } else {
+            const split = req.query[i].split(',');
+            filter_params.push(split[0] ?? '0');
+            filter_params.push(split[1] ?? 'INF');
+        }
+    }
+
+    let queries_where = [];
+    queries_where.push("?")
+    if (go_search_type === 'exact') {
+    } else {
+        const biomes = findBiomeIdByQuery(biomeMap);
+        if (biomes) {
+            const biome = biomes.map(b => b.biome_id).join(',');
+            console.log(biome);
+          }
+        // queries_where.push("go.goid in (SELECT child FROM go_child as gc WHERE gc.parent = ?)");
+    }
+
+    queries_where.push(`c.avg_len >= ? AND c.avg_len <= ?`);
+    queries_where.push(`c.avg_plddt >= ? AND c.avg_plddt <= ?`);
+    queries_where.push(`c.n_mem >= ? AND c.n_mem <= ?`);
+    queries_where.push(`c.rep_len >= ? AND c.rep_len <= ?`);
+    queries_where.push(`c.rep_plddt >= ? AND c.rep_plddt <= ?`);
+    if (is_only_esm != undefined) {
+        queries_where.push(`c.is_only_esm == ?`);
+        filter_params.push(is_only_esm)
+    }
+
+    console.log(queries_where)
+    const query_where = queries_where.slice(1, queries_where.length).join(" AND ");
+    let result = await sql.all(`
+        SELECT DISTINCT *
+            FROM cluster as c
+            WHERE c.lcb_id in (
+                ${queries_where[0]}
+                ) AND ${query_where}
+            `, biome, ...filter_params);
+
+    console.log(result)
+    return finalizeResult(result, req, res);
+});
+
 function sanitizeFTS(input) {
     return input.replace(/[^a-z0-9]/gi, ' ').trim();
 }
@@ -229,6 +283,26 @@ app.get('/api/autocomplete/go/:substring', async (req, res) => {
         FROM go_terms
         ${isGoTerm ? 'WHERE go_id = ?' : 'WHERE go_name MATCH ? ORDER BY rank'};
     `, substring);
+    res.send({ result });
+});
+
+function findBiomeIdByQuery(query) {
+    let results = [];
+    for (const [id, name] of Object.entries(biomeMap)) {
+        if (name && name.includes(query)) {
+            results.push({ biome_name: name, biome_id: id });
+        }
+    }
+    return results.length > 0 ? results : null;
+}
+
+app.get('/api/autocomplete/biome/:substring', async (req, res) => {
+    let substring = req.params.substring;
+    // const isGoTerm = /^GO:\d+$/.test(substring);
+    // if (!isGoTerm) {
+    //     substring = sanitizeFTS(substring);
+    // }
+    let result = findBiomeIdByQuery(substring);
     res.send({ result });
 });
 
