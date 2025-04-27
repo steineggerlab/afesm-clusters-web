@@ -34,8 +34,8 @@
                                 dark
                             >
                                 <v-tab>Uniprot, MGnify</v-tab>
-                                <!-- <v-tab>Gene Ontology</v-tab>
-                                <v-tab>Taxonomy</v-tab>
+                                <!--<v-tab>Biome</v-tab>
+                                 <v-tab>Taxonomy</v-tab>
                                 <v-tab>Structure</v-tab> -->
                             </v-tabs>
                             <v-tabs-items v-model="tab" style="padding: 0.5em;">
@@ -75,31 +75,31 @@
                                         </v-chip-group>
                                     </template>
                                 </v-tab-item>
-                                <!-- <v-tab-item>
-                                    <GoAutocomplete
+                                <v-tab-item>
+                                    <BiomeAutocomplete
                                         :append-icon="inSearch ? $MDI.ProgressWrench : $MDI.Magnify"
-                                        v-model="queryGo"
+                                        v-model="queryBiome"
                                         :disabled="inSearch"
-                                        @click:append="searchGo"
-                                        @keyup.enter="searchGo"
+                                        @click:append="searchBiome"
+                                        @keyup.enter="searchBiome"
                                         @change="selectedExample = null"
                                         @keydown="error = null"
                                         :error="error != null"
                                         :error-messages="error ? error : []"
-                                        ></GoAutocomplete>
+                                        ></BiomeAutocomplete>
 
                                     <v-radio-group 
                                         style="
                                             max-width: 400px;
                                             margin: 0 auto;
                                             "
-                                        v-model="goSearchType"
+                                        v-model="biomeSearchType"
                                         inline>
-                                        <v-radio name="goSearchType" label="Include lower GO lineage" value="lower" dark></v-radio>
-                                        <v-radio name="goSearchType" label="Exact GO term" value="exact" dark ></v-radio>
+                                        <v-radio name="biomeSearchType" label="Include lower Biome lineage" value="lower" dark></v-radio>
+                                        <v-radio name="biomeSearchType" label="Exact Biome" value="exact" dark ></v-radio>
                                     </v-radio-group>
                                 </v-tab-item>
-                                <v-tab-item>
+                                <!-- <v-tab-item>
                                     <TaxonomyNcbiSearch
                                         :append-icon="inSearch ? $MDI.ProgressWrench : $MDI.Magnify"
                                         @click:append="searchLCA"
@@ -127,7 +127,8 @@
                     </v-row>
                 </v-parallax>
             </v-flex>
-            <GoSearchResult v-if="tab == 1" @total="small = $event > 0; inSearch = false;"></GoSearchResult>
+            <BiomeSearchResult v-if="tab == 1" @total="small = $event > 0; inSearch = false;"></BiomeSearchResult>
+            <!-- <GoSearchResult v-if="tab == 1" @total="small = $event > 0; inSearch = false;"></GoSearchResult> -->
             <LCASearchResult v-else-if="tab == 2" @total="small = $event > 0; inSearch = false;"></LCASearchResult>
             <FoldseekSearchResult v-else-if="tab == 3" @total="small = $event > 0; inSearch = false;"></FoldseekSearchResult>
             <v-flex>
@@ -140,7 +141,7 @@
                         
                         <p class="text-subtitle-1 mb-0" style="word-break: break-word;">
                             Yeo&nbsp;J, Han&nbsp;Y, Bordin&nbsp;N, Lau&nbsp;AM, Kandathil&nbsp;SM, Kim&nbsp;H, Karin&nbsp;EL, Mirdita&nbsp;M, Jones&nbsp;DT, Orengo&nbsp;C, Steinegger&nbsp;M. 
-<a href="https://doi.org/NN.NN/2025.04.NN.NN" target="_blank" rel="noopener">
+<a href="https://www.biorxiv.org/content/10.1101/2025.04.23.650224v1" target="_blank" rel="noopener">
 Metagenomic-scale analysis of the predicted protein structure universe.</a> 
 bioRxiv,&nbsp;2025.
                         </p>
@@ -174,6 +175,8 @@ bioRxiv,&nbsp;2025.
 import Panel from "./Panel.vue";
 import GoAutocomplete from "./GoAutocomplete.vue";
 import GoSearchResult from "./GoSearchResult.vue";
+import BiomeAutocomplete from "./BiomeAutocomplete.vue";
+import BiomeSearchResult from "./BiomeSearchResult.vue";
 import FoldseekSearchButton from "./FoldseekSearchButton.vue";
 import TaxonomyNcbiSearch from "./TaxonomyNcbiSearch.vue";
 import LCASearchResult from "./LCASearchResult.vue";
@@ -185,6 +188,8 @@ export default {
         Panel,
         GoAutocomplete,
         GoSearchResult,
+        BiomeAutocomplete,
+        BiomeSearchResult,
         TaxonomyNcbiSearch,
         LCASearchResult,
         FoldseekSearchButton,
@@ -198,12 +203,13 @@ export default {
             examples: [
                 {id:'MGYP001309520873', desc:'putative Virus specific protein'},
                 {id:'MGYP006274345917', desc:'Phage integrase (Hypersaline)'},
-                {id:'MGYP001251735356', desc:'Novel symmetrical domain'},
+                {id:'MGYP002252011424', desc:'Novel domain'},
                 {id:'MGYP001263772116', desc:'Novel Multidomain protein with TonB'},
                 // {id:'A0A1S3QU81', desc:' Gasdermin containing domain'},
             ],
-            queryGo: { text: "immune response", value: "GO:0006955" },
+            queryBiome: { text: "root:Environmental:Aquatic:Thermal springs", value: "198" },
             goSearchType: "lower",
+            biomeSearchType: "exact",
             queryLCA: { text: "Homo sapiens", value: "9606", common_name: "human" },
             lcaSearchType: "lower",
             inSearch: false,
@@ -276,6 +282,22 @@ export default {
             this.$router.push({
                 name: "go",
                 params: { go: this.queryGo.value, type: this.goSearchType }
+            })
+            .catch((error) => {
+                if (error && error.name == "NavigationDuplicated") {
+                    this.inSearch = false;
+                }
+            });
+        },
+        searchBiome() {
+            if (!this.queryBiome) {
+                return;
+            }
+            this.inSearch = true;
+            this.error = null;
+            this.$router.push({
+                name: "biome",
+                params: { biome: this.queryBiome.value, type: this.biomeSearchType }
             })
             .catch((error) => {
                 if (error && error.name == "NavigationDuplicated") {
