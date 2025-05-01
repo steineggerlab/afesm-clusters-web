@@ -29,7 +29,7 @@ console.timeLog();
 
 console.log('Loading SQL...')
 const sql = await open({
-    filename: dataPath + '/afesm.sqlite3',
+    filename: dataPath + '/afdb-test.sqlite3',
     driver: sqlite3.Database,
     mode: sqlite3.OPEN_READONLY,
 })
@@ -38,13 +38,13 @@ console.timeLog();
 console.log('Loading Databases...')
 const checkpoints = [];
 const aaDb = new DbReader();
-checkpoints.push(aaDb.make(dataPath + '/afesm', dataPath + '/afesm.index'));
+checkpoints.push(aaDb.make(dataPath + '/test_afesm', dataPath + '/test_afesm.index'));
 
 const caDb = new DbReader();
-checkpoints.push(caDb.make(dataPath + '/afesm_ca', dataPath + '/afesm_ca.index'));
+checkpoints.push(caDb.make(dataPath + '/test_afesm_ca', dataPath + '/test_afesm_ca.index'));
 
 const plddtDB = new DbReader();
-checkpoints.push(plddtDB.make(dataPath + '/afesm_plddt', dataPath + '/afesm_plddt.index'));
+checkpoints.push(plddtDB.make(dataPath + '/test_afesm_plddt', dataPath + '/test_afesm_plddt.index'));
 
 /*
 const descDB = new DbReader();
@@ -215,13 +215,13 @@ app.get('/api/search/go/:taxonomy?', async (req, res) => {
 });
 
 app.get('/api/search/biome/:taxonomy?', async (req, res) => {
-    console.log("biome", req.query)
+    // console.log("biome", req.query)
     const go_search_type = req.query.biome_search_type;
     let biome = req.query.query_Biome;
 
     const is_only_esm = req.query.is_only_esm;
     let filter_params = [];
-    for (let i of ['avg_length_range', 'avg_plddt_range', 'n_mem_range', 'rep_length_range', 'rep_plddt_range']) {
+    for (let i of ['avg_all_length_range', 'avg_all_plddt_range', 'n_all_mem_range', 'avg_length_range', 'avg_plddt_range', 'n_mem_range', 'rep_length_range', 'rep_plddt_range']) {
         if (typeof(req.query[i]) == "undefined") {
             filter_params.push('0');
             filter_params.push('INF');
@@ -236,14 +236,19 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
     queries_where.push("?")
     if (go_search_type === 'exact') {
     } else {
-        const biomes = findBiomeIdByQuery(biomeMap);
+        // console.log(biomeMap)
+        // console.log(biomeMap[biome])
+        const biomes = findBiomeIdByQuery(biomeMap[biome]);
+        // console.log('biomes', biomes)
         if (biomes) {
-            const biome = biomes.map(b => b.biome_id).join(',');
-            console.log(biome);
+            biome = biomes.map(b => b.biome_id);
+            queries_where[0] = biomes.map(b => '?').join(',');
           }
-        // queries_where.push("go.goid in (SELECT child FROM go_child as gc WHERE gc.parent = ?)");
     }
 
+    queries_where.push(`c.avg_all_len >= ? AND c.avg_all_len <= ?`);
+    queries_where.push(`c.avg_all_plddt >= ? AND c.avg_all_plddt <= ?`);
+    queries_where.push(`c.n_all_mem >= ? AND c.n_all_mem <= ?`);
     queries_where.push(`c.avg_len >= ? AND c.avg_len <= ?`);
     queries_where.push(`c.avg_plddt >= ? AND c.avg_plddt <= ?`);
     queries_where.push(`c.n_mem >= ? AND c.n_mem <= ?`);
@@ -254,17 +259,34 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
         filter_params.push(is_only_esm)
     }
 
-    console.log(queries_where)
     const query_where = queries_where.slice(1, queries_where.length).join(" AND ");
-    let result = await sql.all(`
-        SELECT DISTINCT *
-            FROM cluster as c
-            WHERE c.lcb_id in (
-                ${queries_where[0]}
-                ) AND ${query_where}
-            `, biome, ...filter_params);
 
-    console.log(result)
+    let result;
+    if (go_search_type === 'exact') {
+        result = await sql.all(`
+            SELECT DISTINCT *
+                FROM cluster as c
+                WHERE c.lcb_id in (
+                    ${queries_where[0]}
+                    ) AND ${query_where}
+                `, biome, ...filter_params);
+
+                result.forEach(x => 
+                    x.biome_lineage = (x.lcb_id != 0) ? biomeMap[x.lcb_id] : "None");
+                // console.log(result)
+    } else {
+        result = await sql.all(`
+            SELECT DISTINCT *
+                FROM cluster as c
+                WHERE c.lcb_id in (
+                    ${queries_where[0]}
+                    ) AND ${query_where}
+                `, ...biome, ...filter_params);
+        result.filter(x => 
+                x.biome_lineage = (x.lcb_id != 0) ? biomeMap[x.lcb_id] : "None");
+    }
+            // console.log(queries_where[0], ...biome, query_where)
+    
     return finalizeResult(result, req, res);
 });
 
@@ -289,10 +311,12 @@ app.get('/api/autocomplete/go/:substring', async (req, res) => {
 function findBiomeIdByQuery(query) {
     let results = [];
     for (const [id, name] of Object.entries(biomeMap)) {
+        // console.log(name, query, name.includes(query))
         if (name && name.includes(query)) {
             results.push({ biome_name: name, biome_id: id });
         }
     }
+    // console.log(results)
     return results.length > 0 ? results : null;
 }
 

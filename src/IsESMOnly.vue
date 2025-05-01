@@ -8,20 +8,21 @@
 <script>
 
 export default {
-    name: "IsDark",
-    props: ["isDark"],
+    name: "IsESMOnly",
+    props: ["isESMOnly"],
     computed: {
         flagText() {
-            if (this.isDark == 0) {
+            console.log('z', this)
+            if (this.isESMOnly == 0) {
                 return "No";
-            } else if (this.isDark == 1) {
+            } else if (this.isESMOnly == 1) {
                 return "Yes";
             }
         },
         flagColor() {
-            if (this.isDark == 0) {
+            if (this.isESMOnly == 0) {
                 return "#8FB5D6";
-            } else if (this.isDark == 1) {
+            } else if (this.isESMOnly == 1) {
                 return "#FFC8C1";
             }
         }
