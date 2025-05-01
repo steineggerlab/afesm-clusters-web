@@ -34,7 +34,7 @@
                                 dark
                             >
                                 <v-tab>Uniprot, MGnify</v-tab>
-                                <v-tab>Biome</v-tab>
+                                <!-- <v-tab>Biome</v-tab> -->
                                 <!-- <v-tab>Taxonomy</v-tab> -->
                                 <!-- <v-tab>Structure</v-tab> -->
                             </v-tabs>
