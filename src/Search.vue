@@ -34,9 +34,9 @@
                                 dark
                             >
                                 <v-tab>Uniprot, MGnify</v-tab>
-                                <!--<v-tab>Biome</v-tab>
-                                 <v-tab>Taxonomy</v-tab>
-                                <v-tab>Structure</v-tab> -->
+                                <v-tab>Biome</v-tab>
+                                <!-- <v-tab>Taxonomy</v-tab> -->
+                                <!-- <v-tab>Structure</v-tab> -->
                             </v-tabs>
                             <v-tabs-items v-model="tab" style="padding: 0.5em;">
                                 <v-tab-item>
@@ -99,7 +99,7 @@
                                         <v-radio name="biomeSearchType" label="Exact Biome" value="exact" dark ></v-radio>
                                     </v-radio-group>
                                 </v-tab-item>
-                                <!-- <v-tab-item>
+                                <v-tab-item>
                                     <TaxonomyNcbiSearch
                                         :append-icon="inSearch ? $MDI.ProgressWrench : $MDI.Magnify"
                                         @click:append="searchLCA"
@@ -108,6 +108,7 @@
                                         v-model="queryLCA"
                                         :value="queryLCA ? queryLCA.text : ''"
                                     ></TaxonomyNcbiSearch>
+                                    
                                     <v-radio-group 
                                         style="
                                             max-width: 400px;
@@ -119,7 +120,7 @@
                                         <v-radio name="lcaSearchType" label="Exact LCA identifier" value="exact" dark ></v-radio>
                                     </v-radio-group>
                                 </v-tab-item>
-                                <v-tab-item>
+                                <!-- <v-tab-item>
                                     <FoldseekSearchButton @response="searchFoldseek($event)" dark></FoldseekSearchButton>
                                 </v-tab-item> -->
                             </v-tabs-items>
@@ -129,7 +130,7 @@
             </v-flex>
             <BiomeSearchResult v-if="tab == 1" @total="small = $event > 0; inSearch = false;"></BiomeSearchResult>
             <!-- <GoSearchResult v-if="tab == 1" @total="small = $event > 0; inSearch = false;"></GoSearchResult> -->
-            <LCASearchResult v-else-if="tab == 2" @total="small = $event > 0; inSearch = false;"></LCASearchResult>
+            <!-- <LCASearchResult v-else-if="tab == 2" @total="small = $event > 0; inSearch = false;"></LCASearchResult> -->
             <FoldseekSearchResult v-else-if="tab == 3" @total="small = $event > 0; inSearch = false;"></FoldseekSearchResult>
             <v-flex>
                 <v-card rounded="0">
@@ -241,10 +242,10 @@ export default {
             console.log(value);
         },
         setTab() {
-            if (this.$route.params.go) {
+            if (this.$route.params.biome) {
                 this.tab = 1;
-                this.queryGo = { text: "" + this.$route.params.go, value: this.$route.params.go};
-                this.goSearchType = this.$route.params.type;
+                this.queryBiome = { text: "" + this.$route.params.biome.text, value: this.$route.params.biome.value};
+                this.biomeSearchType = this.$route.params.type;
             } else if (this.$route.params.taxid) {
                 this.tab = 2;
                 this.queryLCA = {text: "" + this.$route.params.taxid, value: this.$route.params.taxid};
