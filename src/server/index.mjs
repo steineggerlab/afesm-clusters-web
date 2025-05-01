@@ -29,7 +29,7 @@ console.timeLog();
 
 console.log('Loading SQL...')
 const sql = await open({
-    filename: dataPath + '/afdb-test.sqlite3',
+    filename: dataPath + '/afesm.sqlite3',
     driver: sqlite3.Database,
     mode: sqlite3.OPEN_READONLY,
 })
@@ -38,13 +38,13 @@ console.timeLog();
 console.log('Loading Databases...')
 const checkpoints = [];
 const aaDb = new DbReader();
-checkpoints.push(aaDb.make(dataPath + '/test_afesm', dataPath + '/test_afesm.index'));
+checkpoints.push(aaDb.make(dataPath + '/afesm', dataPath + '/afesm.index'));
 
 const caDb = new DbReader();
-checkpoints.push(caDb.make(dataPath + '/test_afesm_ca', dataPath + '/test_afesm_ca.index'));
+checkpoints.push(caDb.make(dataPath + '/afesm_ca', dataPath + '/afesm_ca.index'));
 
 const plddtDB = new DbReader();
-checkpoints.push(plddtDB.make(dataPath + '/test_afesm_plddt', dataPath + '/test_afesm_plddt.index'));
+checkpoints.push(plddtDB.make(dataPath + '/afesm_plddt', dataPath + '/afesm_plddt.index'));
 
 /*
 const descDB = new DbReader();
