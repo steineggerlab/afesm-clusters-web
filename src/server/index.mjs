@@ -215,7 +215,7 @@ app.get('/api/search/go/:taxonomy?', async (req, res) => {
 });
 
 app.get('/api/search/biome/:taxonomy?', async (req, res) => {
-    console.log("biome", req.query)
+    // console.log("biome", req.query)
     const go_search_type = req.query.biome_search_type;
     let biome = req.query.query_Biome;
 
@@ -286,7 +286,7 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
                 x.biome_lineage = (x.lcb_id != 0) ? biomeMap[x.lcb_id] : "None");
     }
             // console.log(queries_where[0], ...biome, query_where)
-    
+    console.log(result)
     return finalizeResult(result, req, res);
 });
 
