@@ -94,8 +94,6 @@
                 <IsESMOnly :isESMOnly="prop.value"></IsESMOnly>
             </template>
 
-
-
             <template v-slot:header.avg_all_len="{ header }">
                 <v-menu
                     :close-on-content-click="false"
@@ -381,7 +379,7 @@ export default {
             this.loading = true;
             this.$axios.get("/search/biome", this.requestOptions)
                 .then(response => {
-                    // console.log('biomes', this.response)
+                    console.log('biomes', this.response)
                     this.response = response.data.result;
                     // console.log(this.response)
                     this.total = response.data.total;
