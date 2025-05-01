@@ -29,7 +29,7 @@ console.timeLog();
 
 console.log('Loading SQL...')
 const sql = await open({
-    filename: dataPath + '/afesm.sqlite3',
+    filename: dataPath + '/afdb-test.sqlite3',
     driver: sqlite3.Database,
     mode: sqlite3.OPEN_READONLY,
 })
@@ -38,13 +38,13 @@ console.timeLog();
 console.log('Loading Databases...')
 const checkpoints = [];
 const aaDb = new DbReader();
-checkpoints.push(aaDb.make(dataPath + '/afesm', dataPath + '/afesm.index'));
+checkpoints.push(aaDb.make(dataPath + '/test_afesm', dataPath + '/test_afesm.index'));
 
 const caDb = new DbReader();
-checkpoints.push(caDb.make(dataPath + '/afesm_ca', dataPath + '/afesm_ca.index'));
+checkpoints.push(caDb.make(dataPath + '/test_afesm_ca', dataPath + '/test_afesm_ca.index'));
 
 const plddtDB = new DbReader();
-checkpoints.push(plddtDB.make(dataPath + '/afesm_plddt', dataPath + '/afesm_plddt.index'));
+checkpoints.push(plddtDB.make(dataPath + '/test_afesm_plddt', dataPath + '/test_afesm_plddt.index'));
 
 /*
 const descDB = new DbReader();
@@ -215,7 +215,7 @@ app.get('/api/search/go/:taxonomy?', async (req, res) => {
 });
 
 app.get('/api/search/biome/:taxonomy?', async (req, res) => {
-    // console.log("biome", req.query)
+    console.log("biome", req.query)
     const go_search_type = req.query.biome_search_type;
     let biome = req.query.query_Biome;
 
@@ -621,7 +621,7 @@ app.get('/api/cluster/:cluster', async (req, res) => {
         res.status(404).send({ error: "No cluster found" });
         return;
     }
-    console.log(result);
+    // console.log(result);
     
     if (result.lca_tax_id == 0) {
         result.lca_tax_id = { id: 0, name: 'None', parent: 0, rank: 'no rank' };

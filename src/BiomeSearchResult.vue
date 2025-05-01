@@ -369,7 +369,7 @@ export default {
             console.log(value);
         },
         fetchData () {
-            console.log("zz", this.$route.params)
+            // console.log("zz", this.$route.params)
             if (!this.$route.params.biome) {
                 return;
             }
@@ -377,13 +377,13 @@ export default {
                 return;
             }
             
-            console.log("called", this.requestOptions)
+            // console.log("called", this.requestOptions)
             this.loading = true;
             this.$axios.get("/search/biome", this.requestOptions)
                 .then(response => {
-                    console.log('biomes', this.response)
+                    // console.log('biomes', this.response)
                     this.response = response.data.result;
-                    console.log(this.response)
+                    // console.log(this.response)
                     this.total = response.data.total;
                     this.fetchImages(this.response.map(m => m.rep_accession));
                     this.$emit('total', this.total);
