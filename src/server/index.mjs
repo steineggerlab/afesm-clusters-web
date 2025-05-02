@@ -218,6 +218,7 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
     // console.log("biome", req.query)
     const go_search_type = req.query.biome_search_type;
     let biome = req.query.query_Biome;
+    // console.log(go_search_type, biome);
 
     const is_only_esm = req.query.is_only_esm;
     let filter_params = [];
@@ -286,7 +287,7 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
                 x.biome_lineage = (x.lcb_id != 0) ? biomeMap[x.lcb_id] : "None");
     }
             // console.log(queries_where[0], ...biome, query_where)
-    console.log(result)
+    // console.log(result)
     return finalizeResult(result, req, res);
 });
 
