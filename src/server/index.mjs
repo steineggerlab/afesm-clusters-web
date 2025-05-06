@@ -29,7 +29,7 @@ console.timeLog();
 
 console.log('Loading SQL...')
 const sql = await open({
-    filename: dataPath + '/afesm.sqlite3',
+    filename: dataPath + '/afdb-test.sqlite3',
     driver: sqlite3.Database,
     mode: sqlite3.OPEN_READONLY,
 })
@@ -266,7 +266,7 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
         result = await sql.all(`
             SELECT DISTINCT *
                 FROM cluster as c
-                WHERE c.lcb_id in (
+                WHERE n_biome >= 10 AND c.lcb_id in (
                     ${queries_where[0]}
                     ) AND ${query_where}
                 `, biome, ...filter_params);
@@ -278,7 +278,7 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
         result = await sql.all(`
             SELECT DISTINCT *
                 FROM cluster as c
-                WHERE c.lcb_id in (
+                WHERE n_biome >= 10 AND c.lcb_id in (
                     ${queries_where[0]}
                     ) AND ${query_where}
                 `, ...biome, ...filter_params);
