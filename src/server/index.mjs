@@ -29,7 +29,7 @@ console.timeLog();
 
 console.log('Loading SQL...')
 const sql = await open({
-    filename: dataPath + '/afdb-test.sqlite3',
+    filename: dataPath + '/afesm.sqlite3',
     driver: sqlite3.Database,
     mode: sqlite3.OPEN_READONLY,
 })
