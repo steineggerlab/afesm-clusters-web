@@ -266,8 +266,8 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
     if (go_search_type === 'exact') {
         result = await sql.all(`
             SELECT DISTINCT *
-                FROM cluster as c
-                WHERE n_biome >= 10 AND c.lcb_id in (
+                FROM biome_cluster as c
+                WHERE c.lcb_id in (
                     ${queries_where[0]}
                     ) AND ${query_where}
                 `, biome, ...filter_params);
@@ -278,8 +278,8 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
     } else {
         result = await sql.all(`
             SELECT DISTINCT *
-                FROM cluster as c
-                WHERE n_biome >= 10 AND c.lcb_id in (
+                FROM biome_cluster as c
+                WHERE c.lcb_id in (
                     ${queries_where[0]}
                     ) AND ${query_where}
                 `, ...biome, ...filter_params);
