@@ -65,6 +65,22 @@
                 <TaxSpan :taxonomy="prop.value"></TaxSpan>
             </template>
 
+            <!-- <template v-slot:header.biome_lineage="{ header }">
+                <BiomeAutocomplete
+                    v-model="options.biome_lineage"
+                    :urlFunction="(_, b) => '/search/biome/' + b"
+                    :disabled="biomeAutocompleteDisabled"
+                    :options="requestOptions"
+                    ></BiomeAutocomplete>
+                    :append-icon="inSearch ? $MDI.ProgressWrench : $MDI.Magnify"
+                    @click:append="searchBiome"
+                    @keyup.enter="searchBiome"
+                    @change="selectedExample = null"
+                    @keydown="error = null"
+                    :error="error != null"
+                    :error-messages="error ? error : []" 
+            </template> -->
+
             <template v-slot:item.biome_lineage="prop">
                 <!-- <TaxSpan :taxonomy="prop.value"></TaxSpan> -->
                 {{ prop.item.biome_lineage  }}
@@ -213,6 +229,7 @@ import RangeSlider from './RangeSlider.vue';
 import ExternalLinks from "./ExternalLinks.vue";
 import ImageMixin from "./ImageMixin";
 import IsESMOnly from "./IsESMOnly.vue";
+import BiomeAutocomplete from "./BiomeAutocomplete.vue";
 
 export default {
     name: "gosearchresult",
@@ -222,7 +239,8 @@ export default {
         TaxonomyAutocomplete,
         IsESMOnly,
         RangeSlider,
-        ExternalLinks
+        ExternalLinks,
+        BiomeAutocomplete
     },
     mixins: [ImageMixin],
     data() {
@@ -313,9 +331,11 @@ export default {
                 n_all_mem_range: [0, Infinity],
                 tax_id: null,
                 is_only_esm: null,
+                biome_lineage: null,
                 // is_dark: null,
             },
             taxAutocompleteDisabled: false,
+            biomeAutocompleteDisabled: false,
             range: [5, 5],
         };
     },
