@@ -374,8 +374,10 @@ app.get('/api/search/lca/:taxonomy?', async (req, res) => {
 });
 
 app.get('/api/search/foldseek/:taxonomy?', async (req, res) => {
+    const now = new Date();
     const jobid = encodeURIComponent(req.query.jobid);
 
+	console.log(`1 ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`);
     let results = [];
     if (fileCache.contains(jobid)) {
         results = JSON.parse(fileCache.get(jobid));
@@ -398,7 +400,11 @@ app.get('/api/search/foldseek/:taxonomy?', async (req, res) => {
                 
                 let accession = "";
                 try {
-                    accession = target.match(/AF-(.*)-F\d+-model/)[1];
+		    if (target.startsWith("AF")) {
+                        accession = target.match(/AF-(.*)-F\d+-model/)[1];
+		    } else if (target.startsWith("MGYP")) {
+		        accession = target.match(/(MGYP.*)\.pdb.*/)[1];
+		    }
                 } catch (e) {
                     console.log("error retrieving accession: ", target);
                     accession = "error-retrieving-accession";
@@ -418,7 +424,7 @@ app.get('/api/search/foldseek/:taxonomy?', async (req, res) => {
         
         fileCache.add(jobid, JSON.stringify(results));
     }
-
+console.log(`2 ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`);
     const is_dark = req.query.is_dark;
     let filter_params = [];
     for (let i of ['avg_length_range', 'avg_plddt_range', 'n_mem_range', 'rep_length_range', 'rep_plddt_range']) {
@@ -446,7 +452,7 @@ app.get('/api/search/foldseek/:taxonomy?', async (req, res) => {
     const accessions = results.map(r => r.accession);
     let result = await sql.all(`
         SELECT DISTINCT *
-            FROM cluster as c
+            FROM nonsingleton_or_biome_cluster as c
             WHERE c.rep_accession in (
                 SELECT DISTINCT rep_accession
                 FROM member
@@ -458,6 +464,7 @@ app.get('/api/search/foldseek/:taxonomy?', async (req, res) => {
     result.filter((x) => {
             x.biome_lineage = (x.lcb_id != 0) ? biomeMap[x.lcb_id] : "None";
     });
+	console.log(`3 ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`);
     return finalizeResult(result, req, res);
 });
 
