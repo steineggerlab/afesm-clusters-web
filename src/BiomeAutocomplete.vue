@@ -1,39 +1,31 @@
 <template>
-    <v-tooltip open-delay="300" top>
-        <template v-slot:activator="{ on }">
-            <v-autocomplete
-                outlined
-                :value="value"
-                label="Biome"
-                placeholder="Start typing to search Biomes"
-                hide-no-data
-                no-filter
-                :items="items"
-                :loading="isLoading"
-                :search-input.sync="search"
-                style="max-width: 400px; margin: 0 auto;"
-                @input="change"
-                return-object
-                auto-select-first
-                :allow-overflow="false"
-                dark
-                v-bind="$attrs"
-                v-on="$listeners"
-            >
-                <template v-slot:item="{ item }">
-                    {{ item.text }} ({{ item.value }})
-                </template>
-            </v-autocomplete>
+    <v-autocomplete
+        :disabled="disabled"
+        :allow-overflow="false"
+        :items="items"
+        :loading="isLoading"
+        :search-input.sync="search"
+        :value="value"
+        @input="change"
+        placeholder="Biome filter"
+        hide-no-data
+        return-object
+        auto-select-first
+        clearable
+    >
+        <template v-slot:item="{ item }">
+                {{ item.text }} ({{ item.rank }})
         </template>
-        <span>Search for Biome specific clusters</span>
-    </v-tooltip>
-  </template>
-  
-  <script>
-  import { debounce } from './lib/debounce';
-  
-  export default {
-    props: ['value'],
+    </v-autocomplete>
+</template>
+
+<script>
+import { debounce } from './lib/debounce';
+
+export default {
+    props: [
+        'value', 'cluster', 'urlFunction', 'disabled', 'options',
+    ],
     data() {
         return {
             items: [],
@@ -46,28 +38,40 @@
     },
     watch: {
         value(val) {
-            this.items = [ this.value ];
+            this.items = [ val ];
         },
-        search (val) {
-            val && val.length > 2 && val !== this.value && this.queryGOSelections(val)
+        search(val) {
+            if (val && val.length > 2 && val !== this.value) {
+                this.querySelections(val)
+            }
         },
     },
     methods: {
-        change(goTerm) {
-          this.$emit('input', goTerm);
+        log(value) {
+            console.log(value);
+            return value;
         },
-        queryGOSelections: debounce(function (term) {
-            this.isLoading = true;
-            this.$axios.get("/autocomplete/biome/" + encodeURIComponent(term))
+        change(taxId) {
+            this.$emit('input', taxId);
+        },
+        querySelections: debounce(function (name) {
+            this.loading = true;
+            console.log('hh')
+            const url = this.urlFunction(encodeURIComponent(this.cluster), encodeURIComponent(name));
+            this.$axios.get(url, this.options)
                 .then(response => {
-                    if (response.status == 200 && response.data.hasOwnProperty("result")) {
-                        this.items = response.data.result.map((el) => {
-                            return { text: el.biome_name, value: el.biome_id }
-                        });
-                    }
-                }).finally(() => { this.isLoading = false; });
-        }, 300, false)
+                    this.items = response.data.map(item => {
+                        return { 
+                            text: item.name, 
+                            value: item.id,
+                            rank: item.rank,
+                        }
+                    });
+                }).finally(() => { this.loading = false; });
+        }, 500, false)
     },
-  }
-  </script>
-  
+}
+</script>
+
+<style>
+</style>

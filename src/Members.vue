@@ -107,6 +107,15 @@
                     :disabled="taxAutocompleteDisabled">
                 </TaxonomyAutocomplete>
         </template>
+        <template v-slot:header.biome_lineage="{ header }">
+                <BiomeAutocomplete
+                    :cluster="cluster"
+                    v-model="options.biome_lineage"
+                    :urlFunction="(a, b) => '/cluster/' + a + '/members/biome/' + b"
+                    :options="requestOptions"
+                    :disabled="taxAutocompleteDisabled">
+                </BiomeAutocomplete>
+        </template>
         <template v-slot:item.tax_id="prop">
             <TaxSpan :taxonomy="prop.value"></TaxSpan>
         </template>
@@ -130,6 +139,7 @@ import Fragment from "./Fragment.vue";
 import Sankey from './Sankey.vue';
 import ImageMixin from './ImageMixin';
 import Panel from "./Panel.vue";
+import BiomeAutocomplete from "./BiomeAutocomplete.vue";
 
 export default {
     name: "members",
@@ -139,6 +149,7 @@ export default {
         StructureViewer,
         ExternalLinks,
         TaxonomyAutocomplete,
+        BiomeAutocomplete,
         Fragment,
         Sankey,
     },
@@ -212,15 +223,36 @@ export default {
     computed: {
         requestOptions() {
             let copy = JSON.parse(JSON.stringify(this.options));
+            // console.log(copy)
             if (copy.tax_id) {
                 copy.tax_id = copy.tax_id.value;
             } else {
                 delete copy.tax_id;
             }
+            if (copy.biome_lineage) {
+                copy.biome_lineage = copy.biome_lineage.value;
+                // console.log(copy.biome_lineage)
+            } else {
+                delete copy.biome_lineage;
+            }
+            // console.log(copy)
             const params = new URLSearchParams(copy);
             params.sort();
             return { params };
         },
+        // requestBiomeOptions() {
+        //     let copy = JSON.parse(JSON.stringify(this.options));
+        //     // console.log(copy)
+        //     if (copy.biome_lineage) {
+        //         copy.biome_lineage = copy.biome_lineage.value;
+        //         // console.log(copy.biome_lineage)
+        //     } else {
+        //         delete copy.biome_lineage;
+        //     }
+        //     const params = new URLSearchParams(copy);
+        //     params.sort();
+        //     return { params };
+        // },
     },
     methods: {
         sankeySelect(value) {
@@ -234,7 +266,7 @@ export default {
             // this.fetchData()
         },
         log(value) {
-            console.log(value);
+            // console.log(value);
             return value;
         },
         fetchData() {
@@ -247,10 +279,9 @@ export default {
             this.$axios.get("/cluster/" + cluster + "/members", this.requestOptions)
                 .then(response => {
                     this.members = response.data.result;
-                    console.log(this.members);
                     this.totalMembers = response.data.total;
                     this.fetchImages(this.members.map(m => m.accession));
-                    console.log(this.members)
+                    // console.log(this.members)
                 })
                 .catch(() => {})
                 .finally(() => {
