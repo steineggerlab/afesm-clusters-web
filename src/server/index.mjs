@@ -10,9 +10,11 @@ import { existsSync, readFileSync } from 'fs';
 
 import DbReader from './dbreader.mjs';
 import read from './compressed_ca.mjs';
-import { serializeTree, unserializeTree, idx_to_rank } from './ncbitaxonomy.mjs';
+import { serializeTree, unserializeTree } from './ncbitaxonomy.mjs';
 import FileCache from './filecache.mjs';
 import { convertToQueryUrl } from './utils.mjs';
+
+import { makeSankey, makeBiomeSankey } from './sankey.mjs';
 
 const dataPath =  process.env.DATA_PATH || './data';
 const cachePath = process.env.CACHE_PATH || './data/cache';
@@ -42,15 +44,15 @@ const checkpoints = [];
 const aaDb = new DbReader();
 
 // console.log(n); n++;
-checkpoints.push(aaDb.make(dataPath + '/test_afesm', dataPath + '/test_afesm.index'));
+checkpoints.push(aaDb.make(dataPath + '/' + mainFoldseekDb + '', dataPath + '/' + mainFoldseekDb + '.index'));
 
 // console.log(n); n++;
 const caDb = new DbReader();
-checkpoints.push(caDb.make(dataPath + '/test_afesm_ca', dataPath + '/test_afesm_ca.index'));
+checkpoints.push(caDb.make(dataPath + '/' + mainFoldseekDb + '_ca', dataPath + '/' + mainFoldseekDb + '_ca.index'));
 
 // console.log(n); n++;
 const plddtDB = new DbReader();
-checkpoints.push(plddtDB.make(dataPath + '/test_afesm_plddt', dataPath + '/test_afesm_plddt.index'));
+checkpoints.push(plddtDB.make(dataPath + '/' + mainFoldseekDb + '_plddt', dataPath + '/' + mainFoldseekDb + '_plddt.index'));
 
 /*
 const descDB = new DbReader();
@@ -72,6 +74,9 @@ const biomeMap = Object.fromEntries(
       .split('\n')
       .map(line => line.split('\t'))
   );
+const biomeMap_strToId = Object.fromEntries(
+    Object.entries(biomeMap).map(([key, value]) => [value, key])
+)
 
 await Promise.all(checkpoints);
 console.timeLog();
@@ -535,72 +540,6 @@ app.get('/api/cluster/:cluster/annotations', async (req, res) => {
 });
 
 
-function makeSankey(result) {
-    let nodes = {};
-    let links = {};
-    const allowedRanks = [28, 27, 24, 12, 8, 4];
-    result.forEach((x) => {
-        if (tree.nodeExists(x.tax_id) == false) {
-            return;
-        }
-        let node = tree.getNode(x.tax_id, true);
-        while (node.id != 1) {
-            let currentNode = node;
-            // skip all ranks except superkingdom, phylum, class, order, family, genus
-            while (!allowedRanks.includes(currentNode.rank)) {
-                currentNode = tree.getNode(currentNode.parent, true);
-                if (currentNode.id == 1) {
-                    break;
-                }
-            }
-
-            let parentNode = tree.getNode(currentNode.parent, true);
-            while (!allowedRanks.includes(parentNode.rank)) {
-                parentNode = tree.getNode(parentNode.parent, true);
-                if (parentNode.id == 1) {
-                    break;
-                }
-            }
-
-            if (!(currentNode.id in nodes)) {
-                nodes[currentNode.id] = {
-                    id: currentNode.id,
-                    name: currentNode.name,
-                    rank: idx_to_rank[currentNode.rank],
-                };
-            }
-
-            if (!(parentNode.id in nodes)) {
-                nodes[parentNode.id] = {
-                    id: parentNode.id,
-                    name: parentNode.name,
-                    rank: idx_to_rank[parentNode.rank],
-                };
-            }
-
-            node = parentNode;
-            if (currentNode.id == 1 || parentNode.id == 1) {
-                break;
-            }
-
-            const linkKey = `${currentNode.id}-${parentNode.id}`;
-            if (!(linkKey in links)) {
-                links[linkKey] = {
-                    source: parentNode.id,
-                    target: currentNode.id,
-                    value: 1,
-                    rank: idx_to_rank[parentNode.rank],
-                    name: parentNode.name,
-                }
-            } else {
-                links[linkKey].value += 1;
-            }
-        }
-    });
-    // nodes['root'] = { id : 'root' };
-    return { nodes : Object.values(nodes), links : Object.values(links) };
-}
-
 app.get('/api/cluster/:cluster/sankey-members', async (req, res) => {
     const cluster = req.params.cluster;
     let result = await sql.all(`
@@ -608,7 +547,17 @@ app.get('/api/cluster/:cluster/sankey-members', async (req, res) => {
         FROM member
         WHERE rep_accession == ?;
     `, cluster);
-    res.send({result: makeSankey(result)});
+    res.send({result: makeSankey(result, tree)});
+});
+
+app.get('/api/cluster/:cluster/sankey-biome-members', async (req, res) => {
+    const cluster = req.params.cluster;
+    let result = await sql.all(`
+    SELECT tax_id, biome_id
+        FROM member
+        WHERE rep_accession == ?;
+    `, cluster);
+    res.send({result: makeBiomeSankey(result, tree, biomeMap, biomeMap_strToId)});
 });
 
 app.get('/api/cluster/:cluster/sankey-similars', async (req, res) => {
@@ -700,9 +649,10 @@ app.get('/api/cluster/:cluster/members', async (req, res) => {
             WHERE rep_accession = ? ${flagFilter}
             ORDER BY rowid;
         `, ...args);
+        // console.log(req.query)
         
         result = result.filter((x) => {
-            console.log("??")
+            // console.log("??")
             // x.tax_id = tree.nodeExists(x.tax_id) ? tree.getNode(x.tax_id) : null;
             if (req.query.tax_id) {
                 if (tree.nodeExists(x.tax_id) == false) {
@@ -723,24 +673,47 @@ app.get('/api/cluster/:cluster/members', async (req, res) => {
                     return false;
             }
             if (req.query.biome_lineage) {
-                if (tree.nodeExists(x.tax_id)) {
-                    // console.log(x, tree.getNode(x.tax_id))
-                    x.tax_id = tree.getNode(x.tax_id);
-                }
-                if (x.biome_id != req.query.biome_lineage) {
-                    // console.log(x)
-                    // return true
+                // console.log(x, tree.nodeExists(x.tax_id))
+                // x.tax_id = tree.nodeExists(x.tax_id) ? tree.getNode(x.tax_id) : null;
+
+                // const biomeTokens = biomeMap[req.query.biome_lineage].split(":");
+                x.tax_id = tree.nodeExists(x.tax_id) ? tree.getNode(x.tax_id) : null;
+
+                if (x.biome_id == 0)
                     return false;
-                } else {
-                    // x.tax_id = tree.nodeExists(x.tax_id) ? tree.getNode(x.tax_id) : null;
-                    x.biome_lineage = (x.biome_id != 0) ? biomeMap[x.biome_id] : "None";
+                // console.log(x.biome_id, biomeMap[x.biome_id], biomeMap[0], biomeMap[42])
+                const biomeTokens = biomeMap[x.biome_id].split(":");
+
+                let is_pass = false;
+                // for (let i = biomeTokens.length; i >= 1; i--) {
+                //     const curBiomeId = biomeMap_strToId[biomeTokens.slice(0, i).join(':')];
+
+                //     if (x.biome_id == curBiomeId) {
+                //         // x.tax_id = tree.nodeExists(x.tax_id) ? tree.getNode(x.tax_id) : null;
+                //         x.biome_lineage = (x.biome_id != 0) ? biomeMap[x.biome_id] : "None";
+                //         is_pass = true;
+                //         break;
+                //     }
+                // }
+                for (let i = biomeTokens.length; i >= 1; i--) {
+                    const curBiomeId = biomeMap_strToId[biomeTokens.slice(0, i).join(':')];
+
+                    if (req.query.biome_lineage == curBiomeId) {
+                        // x.tax_id = tree.nodeExists(x.tax_id) ? tree.getNode(x.tax_id) : null;
+                        x.biome_lineage = (x.biome_id != 0) ? biomeMap[x.biome_id] : "None";
+                        is_pass = true;
+                        break;
+                    }
                 }
+                if (!is_pass)
+                    return false;
             }
 
             // x.biome_lineage = (x.biome_id != 0) ? biomeMap[x.biome_id] : "None";
             // console.log('y', x)
             return true;
         });
+        // console.log(result)
         
         if (paginate) {
             total = result.length;
@@ -844,25 +817,38 @@ app.get('/api/cluster/:cluster/members/biome/:suggest', async (req, res) => {
         `, req.params.cluster); 
     let suggestions = {};
     let count = 0;
+
+    // console.log('/api/cluster/:cluster/members/biome/:suggest', result)
     
     result.forEach((x) => {
         if (x.biome_id == 0) {
             return;
         }
-        let node = biomeMap[x.biome_id];
+        // let node = biomeMap[x.biome_id];
+
+        const biomeTokens = biomeMap[x.biome_id].split(":");
+
+        let is_pass = false;
+        for (let i = biomeTokens.length; i >= 1; i--) {
+            let node = biomeTokens.slice(0, i).join(':');
+
+            if (node.id in suggestions || count >= 10) {
+                return;
+            }
+
+
+            
+            if (node.toLowerCase().includes(req.params.suggest.toLowerCase())) {
+                suggestions[x.biome_id] = {};
+                suggestions[x.biome_id].name = node;
+                suggestions[x.biome_id].id = x.biome_id;
+                suggestions[x.biome_id].rank = x.biome_id;
+                count++;
+            }
+        }
         // console.log(node)
         // while (node.id != 0) {
-        if (node.id in suggestions || count >= 10) {
-            return;
-        }
         // console.log(node)
-        if (node.toLowerCase().includes(req.params.suggest.toLowerCase())) {
-            suggestions[x.biome_id] = {};
-            suggestions[x.biome_id].name = node;
-            suggestions[x.biome_id].id = x.biome_id;
-            suggestions[x.biome_id].rank = x.biome_id;
-            count++;
-        }
             // node = tree.getNode(node.parent);
         // }
     });

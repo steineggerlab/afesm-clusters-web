@@ -48,7 +48,6 @@ export default {
     },
     methods: {
         log(value) {
-            console.log(value);
             return value;
         },
         change(taxId) {
@@ -56,11 +55,11 @@ export default {
         },
         querySelections: debounce(function (name) {
             this.loading = true;
-            console.log('hh')
             const url = this.urlFunction(encodeURIComponent(this.cluster), encodeURIComponent(name));
             this.$axios.get(url, this.options)
                 .then(response => {
                     this.items = response.data.map(item => {
+                        console.log('BiomeAutoComplete.vue querySelections', item)
                         return { 
                             text: item.name, 
                             value: item.id,

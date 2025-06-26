@@ -84,7 +84,7 @@ export default {
 				.get("/cluster/" + this.cluster + "/sankey-" + this.type)
 				.then((response) => {
 					this.response = response.data.result;
-					// console.log(this.response)
+					console.log(this.response)
 				})
 				.catch(() => {});
 		},
@@ -320,7 +320,7 @@ export default {
 			sankeyGenerator.update(graph);
 
 			// Add rank column labels
-			const rankLabels = ["D", "K", "P", "F", "G", "S"];
+			const rankLabels = ["1", "2", "3", "4", "5", "6"];
 			svg
 				.append("g")
 				.selectAll("text")

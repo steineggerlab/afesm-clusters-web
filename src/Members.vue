@@ -28,7 +28,14 @@
     </template>
         
 <template slot="content" v-if="$route.params.cluster">
-    <Sankey :cluster="cluster" type="members" @select="sankeySelect"></Sankey>
+    <v-row dense>
+        <v-col cols="12" md="6">
+            <Sankey :cluster="cluster" type="members" @select="sankeySelect" />
+        </v-col>
+        <v-col cols="12" md="6">
+            <SankeyBiome :cluster="cluster" type="biome-members" @select="sankeyBiomeSelect" />
+        </v-col>
+    </v-row>
     <v-data-table
         :headers="headers"
         :items="members"
@@ -113,7 +120,7 @@
                     v-model="options.biome_lineage"
                     :urlFunction="(a, b) => '/cluster/' + a + '/members/biome/' + b"
                     :options="requestOptions"
-                    :disabled="taxAutocompleteDisabled">
+                    :disabled="biomeAutocompleteDisabled">
                 </BiomeAutocomplete>
         </template>
         <template v-slot:item.tax_id="prop">
@@ -137,6 +144,7 @@ import ExternalLinks from "./ExternalLinks.vue";
 import TaxonomyAutocomplete from "./TaxonomyAutocomplete.vue";
 import Fragment from "./Fragment.vue";
 import Sankey from './Sankey.vue';
+import SankeyBiome from './SankeyBiome.vue';
 import ImageMixin from './ImageMixin';
 import Panel from "./Panel.vue";
 import BiomeAutocomplete from "./BiomeAutocomplete.vue";
@@ -152,6 +160,7 @@ export default {
         BiomeAutocomplete,
         Fragment,
         Sankey,
+        SankeyBiome,
     },
     props: ["cluster"],
     mixins: [ImageMixin],
@@ -207,6 +216,7 @@ export default {
                 tax_id: null,
             },
             taxAutocompleteDisabled: false,
+            biomeAutocompleteDisabled: false,
         }
     },
     watch: {
@@ -223,7 +233,7 @@ export default {
     computed: {
         requestOptions() {
             let copy = JSON.parse(JSON.stringify(this.options));
-            // console.log(copy)
+            console.log('Members.vue requestOptions', copy)
             if (copy.tax_id) {
                 copy.tax_id = copy.tax_id.value;
             } else {
@@ -256,12 +266,24 @@ export default {
     },
     methods: {
         sankeySelect(value) {
+            console.log('sankeySelect', value)
             if (value == null) {
                 this.options.tax_id = null;
                 this.taxAutocompleteDisabled = false;
             } else {
                this.options.tax_id = { value: value.id, text: value.name };
                this.taxAutocompleteDisabled = true;
+            }
+            // this.fetchData()
+        },
+        sankeyBiomeSelect(value) {
+            console.log('sankeyBiomeSelect', value)
+            if (value == null) {
+                this.options.biome_lineage = null;
+                this.biomeAutocompleteDisabled = false;
+            } else {
+               this.options.biome_lineage = { value: value.id, text: value.name };
+               this.biomeAutocompleteDisabled = true;
             }
             // this.fetchData()
         },
