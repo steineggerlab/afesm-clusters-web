@@ -214,6 +214,7 @@ export default {
             loading: false,
             options: {
                 tax_id: null,
+                biome_lineage: null,
             },
             taxAutocompleteDisabled: false,
             biomeAutocompleteDisabled: false,
