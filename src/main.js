@@ -38,9 +38,7 @@ import {
     mdiExport,
 } from '@mdi/js'
 
-const API_BASE =  process.env.API_BASE || 'https://localhost';
-const port = process.env.EXPRESS_PORT || 3000;
-const API_URL = API_BASE + ":" + port + "/";
+const API_BASE =  process.env.API_BASE || 'https://localhost:3001/';
 
 Vue.use(VueRouter);
 Vue.use(Vuetify);
@@ -120,7 +118,7 @@ Vue.use({
             GitHub: mdiGithub,
             Export: mdiExport,
         };
-        let apiBase = API_URL + "api";
+        let apiBase = API_BASE + "api";
         // let apiBase = "https://cluster.foldseek.com/api";
         // let apiBase = "/api";
         let defaultHeaders = {};
