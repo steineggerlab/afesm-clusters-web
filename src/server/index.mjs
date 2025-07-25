@@ -302,6 +302,7 @@ app.get('/api/search/biome/:taxonomy?', async (req, res) => {
     return finalizeResult(result, req, res);
 });
 
+
 function sanitizeFTS(input) {
     return input.replace(/[^a-z0-9]/gi, ' ').trim();
 }
@@ -827,22 +828,24 @@ app.get('/api/cluster/:cluster/members/biome/:suggest', async (req, res) => {
         // let node = biomeMap[x.biome_id];
 
         const biomeTokens = biomeMap[x.biome_id].split(":");
-
+    
         let is_pass = false;
         for (let i = biomeTokens.length; i >= 1; i--) {
             let node = biomeTokens.slice(0, i).join(':');
+            let node_id = biomeMap_strToId[node];
+            // console.log(node, biomeMap_strToId[node])
 
-            if (node.id in suggestions || count >= 10) {
+            if (node_id in suggestions || count >= 10) {
                 return;
             }
 
 
             
             if (node.toLowerCase().includes(req.params.suggest.toLowerCase())) {
-                suggestions[x.biome_id] = {};
-                suggestions[x.biome_id].name = node;
-                suggestions[x.biome_id].id = x.biome_id;
-                suggestions[x.biome_id].rank = x.biome_id;
+                suggestions[node_id] = {};
+                suggestions[node_id].name = node;
+                suggestions[node_id].id = node_id;
+                suggestions[node_id].rank = i;
                 count++;
             }
         }

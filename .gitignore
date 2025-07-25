@@ -10,6 +10,7 @@ pkg/
 resources/
 backend/.cache/
 .vscode/
+.env
 
 data/taxdump.tar.gz
 data/*.dmp

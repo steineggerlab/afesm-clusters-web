@@ -6,7 +6,7 @@
         :loading="isLoading"
         :search-input.sync="search"
         :value="value"
-        @input="change"
+        @input="change" 
         placeholder="Biome filter"
         hide-no-data
         return-object
@@ -59,7 +59,7 @@ export default {
             this.$axios.get(url, this.options)
                 .then(response => {
                     this.items = response.data.map(item => {
-                        console.log('BiomeAutoComplete.vue querySelections', item)
+                        // console.log('BiomeAutoComplete.vue querySelections', item)
                         return { 
                             text: item.name, 
                             value: item.id,

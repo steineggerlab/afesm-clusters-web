@@ -36,7 +36,7 @@
                                 <v-tab>Uniprot, MGnify</v-tab>
                                 <v-tab>Biome</v-tab>
                                 <!-- <v-tab>Taxonomy</v-tab> -->
-                                <v-tab>Structure</v-tab>
+                                <!-- <v-tab>Structure</v-tab> -->
                             </v-tabs>
                             <v-tabs-items v-model="tab" style="padding: 0.5em;">
                                 <v-tab-item>
@@ -76,17 +76,25 @@
                                     </template>
                                 </v-tab-item>
                                 <v-tab-item>
-                                    <BiomeAutocomplete
+                                    <!-- <BiomeAutocomplete
                                         :append-icon="inSearch ? $MDI.ProgressWrench : $MDI.Magnify"
                                         v-model="queryBiome"
                                         :disabled="inSearch"
+                                        :urlFunction="(a, b) => '/search/biome/' + a + '/members/biome/' + b"
                                         @click:append="searchBiome"
                                         @keyup.enter="searchBiome"
                                         @change="selectedExample = null"
                                         @keydown="error = null"
                                         :error="error != null"
                                         :error-messages="error ? error : []"
-                                        ></BiomeAutocomplete>
+                                        ></BiomeAutocomplete> -->
+                                    <BiomeSearch
+                                        :append-icon="inSearch ? $MDI.ProgressWrench : $MDI.Magnify"
+                                        @click:append="searchBiome"
+                                        @keyup.enter="searchBiome"
+                                        v-model="queryBiome"
+                                        :value="queryBiome ? `${queryBiome.text} (${queryBiome.value})` : ''"
+                                    ></BiomeSearch>
 
                                     <v-radio-group 
                                         style="
@@ -177,6 +185,7 @@ import Panel from "./Panel.vue";
 import GoAutocomplete from "./GoAutocomplete.vue";
 import GoSearchResult from "./GoSearchResult.vue";
 import BiomeAutocomplete from "./BiomeAutocomplete.vue";
+import BiomeSearch from "./BiomeSearch.vue";
 import BiomeSearchResult from "./BiomeSearchResult.vue";
 import FoldseekSearchButton from "./FoldseekSearchButton.vue";
 import TaxonomyNcbiSearch from "./TaxonomyNcbiSearch.vue";
@@ -190,6 +199,7 @@ export default {
         GoAutocomplete,
         GoSearchResult,
         BiomeAutocomplete,
+        BiomeSearch,
         BiomeSearchResult,
         TaxonomyNcbiSearch,
         LCASearchResult,
@@ -296,6 +306,8 @@ export default {
             }
             this.inSearch = true;
             this.error = null;
+            // this.biomeSearchType = 'exact';
+            // this.queryBiome = { value: '402'}
             this.$router.push({
                 name: "biome",
                 params: { biome: this.queryBiome.value, type: this.biomeSearchType }
@@ -305,6 +317,8 @@ export default {
                     this.inSearch = false;
                 }
             });
+            // console.log("Search.vue searchBiome pressed");
+            // this.inSearch = false;
         },
         searchLCA() {
             if (!this.queryLCA) {
