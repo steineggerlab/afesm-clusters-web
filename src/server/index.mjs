@@ -31,7 +31,7 @@ if (!existsSync(dataPath + '/ncbitaxonomy.json')) {
 const tree = unserializeTree(dataPath + '/ncbitaxonomy.json');
 console.timeLog();
 
-console.log('Loading SQL...')
+console.log(`Loading SQL... ${dataPath + '/' + mainDb}`)
 const sql = await open({
     filename: dataPath + '/' + mainDb,
     driver: sqlite3.Database,

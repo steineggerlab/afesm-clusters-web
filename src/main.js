@@ -38,7 +38,7 @@ import {
     mdiExport,
 } from '@mdi/js'
 
-const API_BASE =  process.env.API_BASE || 'https://localhost:3001/';
+const API_BASE =  process.env.API_BASE || 'http://localhost:3001/'; // local
 
 Vue.use(VueRouter);
 Vue.use(Vuetify);
