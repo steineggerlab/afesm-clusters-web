@@ -13,9 +13,9 @@ export default {
     computed: {
         flagText() {
             if (this.flag == 1) {
-                return "AFESM/Foldseek";
+                return "AFESM/MMseqs2";
             } else if (this.flag == 2) {
-                return "AFESM30/MMseqs2";
+                return "AFESM30/Foldseek";
             } else if (this.flag == 3) {
                 return "low plddt";
             } else if (this.flag == 4) {
